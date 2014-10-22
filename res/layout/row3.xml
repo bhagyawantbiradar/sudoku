@@ -12,7 +12,7 @@
                 android:layout_height="wrap_content"
                 android:stretchColumns="*"
                 android:layout_margin="2dp"
-                android:background="@drawable/border_red">
+                >
 
             <TableRow android:layout_width="fill_parent">
                 <EditText android:text="1"
@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:stretchColumns="*"
                 android:layout_margin="2dp"
-                android:background="@drawable/border_red">
+                >
 
             <TableRow android:layout_width="fill_parent">
                 <EditText android:text="1"
@@ -107,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:stretchColumns="*"
                 android:layout_margin="2dp"
-                android:background="@drawable/border_red">
+               >
 
             <TableRow android:layout_width="fill_parent">
                 <EditText android:text="1"
