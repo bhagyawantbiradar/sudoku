@@ -1,13 +1,14 @@
-package com.tw.Sudoku;
+package com.tw.sudoku;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.InputType;
-import android.view.Menu;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.EditText;
+import android.widget.GridLayout;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class SudokuGenerator extends Activity {
     GridLayout gl;
@@ -26,7 +27,6 @@ public class SudokuGenerator extends Activity {
             text[i].setLayoutParams(new LinearLayout.LayoutParams
                     (ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             text[i].setTextSize(8);
-            text[i].setText("2");
             InputFilter[] filterArray = new InputFilter[1];
             filterArray[0] = new InputFilter.LengthFilter(1);
             text[i].setFilters(filterArray);
