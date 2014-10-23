@@ -10,7 +10,7 @@ public class RandomNumbersGeneratorTest {
 
     @Test
     public void testRandomNumbersGeneratorGeneratesListContainingAllNumbers1To9WithoutDuplicateValues() throws Exception {
-        List<Integer> randomNumbers = new RandomNumbersGenerator().getRandomNumbers();
+        List<Integer> randomNumbers = new RandomNumbersGenerator().getNumbers();
         Collections.sort(randomNumbers);
         Set<Integer> uniqueRandomNumbers = new HashSet<Integer>(randomNumbers);
         assertEquals(9, randomNumbers.size());
@@ -21,8 +21,8 @@ public class RandomNumbersGeneratorTest {
 
     @Test
     public void testRandomNumbersGenerator() throws Exception {
-        List<Integer> randomNumbers1 = new RandomNumbersGenerator().getRandomNumbers();
-        List<Integer> randomNumbers2 = new RandomNumbersGenerator().getRandomNumbers();
+        List<Integer> randomNumbers1 = new RandomNumbersGenerator().getNumbers();
+        List<Integer> randomNumbers2 = new RandomNumbersGenerator().getNumbers();
 
         assertNotSame(randomNumbers1, randomNumbers2);
     }
