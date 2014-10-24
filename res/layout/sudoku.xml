@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:background="#ffffff">
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-          android:id="@+id/grid_view"
-          android:layout_width="fill_parent"
-          android:layout_height="fill_parent"
-          android:numColumns="9"
-          android:columnWidth="90dp"
-          android:horizontalSpacing="10dp"
-          android:verticalSpacing="10dp"
-          android:gravity="center"
-          android:stretchMode="columnWidth"
-          android:layout_margin="2dp"
-          android:background="#000000"
-          >
-</GridLayout>
-</TableLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+    <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="*"
+            android:background="#00ff00">
+     <include layout="@layout/row1"/>
+     <include layout="@layout/row2"/>
+     <include layout="@layout/row3"/>
+    </TableLayout>
+    <Button android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="@string/done"
+            android:layout_marginTop="20dp"
+            android:background="@color/done_background"/>
+
+</LinearLayout>

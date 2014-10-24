@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
- <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                      android:layout_width="fill_parent"
-                      android:layout_height="wrap_content">
 <TableLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
@@ -14,44 +11,38 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:stretchColumns="*"
-                android:layout_margin="2dp">
+                android:layout_margin="1dp">
 
             <TableRow android:layout_width="fill_parent">
-                <EditText android:text="1"
-                        style="@style/cell_style"
-                        android:id="@+id/r1_c1"/>
-                <EditText android:text="2"
-                        style="@style/cell_style"
-                        android:id="@+id/r1_c2"/>
-                <EditText  android:text="3"
-                        style="@style/cell_style"
-                        android:id="@+id/r1_c3"/>
+                <EditText style="@style/cell_style"
+                          android:id="@+id/r1_c0"/>
+                <EditText style="@style/cell_style"
+                          android:id="@+id/r1_c1"/>
+                <EditText style="@style/cell_style"
+                          android:id="@+id/r1_c2"/>
+
             </TableRow>
 
 
             <TableRow android:layout_width="fill_parent">
-                <EditText  android:text="4"
-                          style="@style/cell_style"
-                       android:id="@+id/r2_c1" />
-                <EditText  android:text="5"
-                          style="@style/cell_style"
+                <EditText style="@style/cell_style"
+                          android:id="@+id/r2_c0"/>
+                <EditText style="@style/cell_style"
+                          android:id="@+id/r2_c1"/>
+                <EditText style="@style/cell_style"
                           android:id="@+id/r2_c2"/>
-                <EditText  android:text="6"
-                          style="@style/cell_style"
-                        android:id="@+id/r2_c3"/>
+
             </TableRow>
 
 
             <TableRow android:layout_width="fill_parent">
-                <EditText android:text="7"
-                          style="@style/cell_style"
-                        android:id="@+id/r3_c1"/>
-                <EditText android:text="8"
-                          style="@style/cell_style"
-                        android:id="@+id/r3_c2"/>
-                <EditText android:text="9"
-                          style="@style/cell_style"
-                        android:id="@+id/r3_c3"/>
+                <EditText style="@style/cell_style"
+                          android:id="@+id/r0_c0"/>
+                <EditText style="@style/cell_style"
+                          android:id="@+id/r0_c1"/>
+                <EditText style="@style/cell_style"
+                          android:id="@+id/r0_c2"/>
+
             </TableRow>
 
         </TableLayout>
@@ -61,45 +52,39 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:stretchColumns="*"
-                android:layout_margin="2dp">
+                android:layout_margin="1dp">
 
             <TableRow android:layout_width="fill_parent">
-                <EditText android:text="1"
-                          style="@style/cell_style"
+                <EditText style="@style/cell_style"
+                          android:id="@+id/r0_c3"/>
+                <EditText style="@style/cell_style"
+                          android:id="@+id/r0_c4"/>
+                <EditText style="@style/cell_style"
+                          android:id="@+id/r0_c5"/>
+
+            </TableRow>
+            <TableRow android:layout_width="fill_parent">
+                <EditText style="@style/cell_style"
+                          android:id="@+id/r1_c3"/>
+                <EditText style="@style/cell_style"
                           android:id="@+id/r1_c4"/>
-                <EditText android:text="2"
-                          style="@style/cell_style"
+                <EditText style="@style/cell_style"
                           android:id="@+id/r1_c5"/>
-                <EditText  android:text="3"
-                           style="@style/cell_style"
-                           android:id="@+id/r1_c6"/>
+
             </TableRow>
 
 
             <TableRow android:layout_width="fill_parent">
-                <EditText  android:text="4"
-                           style="@style/cell_style"
-                           android:id="@+id/r2_c4" />
-                <EditText  android:text="5"
-                           style="@style/cell_style"
-                           android:id="@+id/r2_c5"/>
-                <EditText  android:text="6"
-                           style="@style/cell_style"
-                           android:id="@+id/r2_c6"/>
+                <EditText style="@style/cell_style"
+                          android:id="@+id/r2_c3"/>
+                <EditText style="@style/cell_style"
+                          android:id="@+id/r2_c4"/>
+                <EditText style="@style/cell_style"
+                          android:id="@+id/r2_c5"/>
+
             </TableRow>
 
 
-            <TableRow android:layout_width="fill_parent">
-                <EditText android:text="7"
-                          style="@style/cell_style"
-                          android:id="@+id/r3_c4"/>
-                <EditText android:text="8"
-                          style="@style/cell_style"
-                          android:id="@+id/r3_c5"/>
-                <EditText android:text="9"
-                          style="@style/cell_style"
-                          android:id="@+id/r3_c6"/>
-            </TableRow>
 
         </TableLayout>
         <TableLayout
@@ -107,51 +92,40 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:stretchColumns="*"
-                android:layout_margin="2dp">
+                android:layout_margin="1dp">
+
 
             <TableRow android:layout_width="fill_parent">
-                <EditText android:text="1"
-                          style="@style/cell_style"
+                <EditText style="@style/cell_style"
+                          android:id="@+id/r0_c6"/>
+                <EditText style="@style/cell_style"
+                          android:id="@+id/r0_c7"/>
+                <EditText style="@style/cell_style"
+                          android:id="@+id/r0_c8"/>
+            </TableRow>
+            <TableRow android:layout_width="fill_parent">
+                <EditText style="@style/cell_style"
+                          android:id="@+id/r1_c6"/>
+                <EditText style="@style/cell_style"
                           android:id="@+id/r1_c7"/>
-                <EditText android:text="2"
-                          style="@style/cell_style"
+                <EditText style="@style/cell_style"
                           android:id="@+id/r1_c8"/>
-                <EditText  android:text="3"
-                           style="@style/cell_style"
-                           android:id="@+id/r1_c9"/>
             </TableRow>
 
 
             <TableRow android:layout_width="fill_parent">
-                <EditText  android:text="4"
-                           style="@style/cell_style"
-                           android:id="@+id/r2_c7" />
-                <EditText  android:text="5"
-                           style="@style/cell_style"
-                           android:id="@+id/r2_c8"/>
-                <EditText  android:text="6"
-                           style="@style/cell_style"
-                           android:id="@+id/r2_c9"/>
+                <EditText style="@style/cell_style"
+                          android:id="@+id/r2_c6"/>
+                <EditText style="@style/cell_style"
+                          android:id="@+id/r2_c7"/>
+                <EditText style="@style/cell_style"
+                          android:id="@+id/r2_c8"/>
             </TableRow>
 
 
-            <TableRow android:layout_width="fill_parent">
-                <EditText android:text="7"
-                          style="@style/cell_style"
-                          android:id="@+id/r3_c7"/>
-                <EditText android:text="8"
-                          style="@style/cell_style"
-                          android:id="@+id/r3_c8"/>
-                <EditText android:text="9"
-                          style="@style/cell_style"
-                          android:id="@+id/r3_c9"/>
-            </TableRow>
 
         </TableLayout>
     </TableRow>
-    <include layout="@layout/row2"/>
-    <include layout="@layout/row3"/>
 
 </TableLayout>
 
-</LinearLayout>
