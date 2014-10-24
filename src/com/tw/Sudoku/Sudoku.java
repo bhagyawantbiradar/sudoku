@@ -74,9 +74,9 @@ public class Sudoku {
     private List<ArrayList<ArrayList<Integer>>> getPuzzleWithFirstLineInserted(int size) {
         List<Integer> numbers = this.generator.getNumbers();
         List<ArrayList<ArrayList<Integer>>> puzzle = new ArrayList<>();
-        puzzle.add(new ArrayList<>());
+        puzzle.add(new ArrayList<ArrayList<Integer>>());
         for (int row = 0; row < size; row++) {
-            puzzle.get(0).add(new ArrayList<>());
+            puzzle.get(0).add(new ArrayList<Integer>());
             for (int column = 0; column < size; column++)   puzzle.get(0).get(row).add(column, numbers.get((row * 3) + column));
         }
         return puzzle;
