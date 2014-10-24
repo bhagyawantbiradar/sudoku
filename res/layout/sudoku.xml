@@ -9,7 +9,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:stretchColumns="*"
-            android:background="#00ff00">
+            android:background="#000000">
      <include layout="@layout/row1"/>
      <include layout="@layout/row2"/>
      <include layout="@layout/row3"/>

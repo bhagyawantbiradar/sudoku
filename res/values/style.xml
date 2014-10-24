@@ -8,6 +8,8 @@
         <item name="android:digits">1,2,3,4,5,6,7,8,9</item>
         <item name="android:maxLength">1</item>
         <item name="android:layout_width">30dp</item>
+        <item name="android:textColor">#2709E6</item>
+        <item name="android:textCursorDrawable">@null</item>
     </style>
 </resources>
 

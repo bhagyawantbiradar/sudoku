@@ -1,6 +1,7 @@
 package com.tw.game;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.widget.EditText;
@@ -40,6 +41,7 @@ public class SudokuGeneratorActivity extends Activity {
                     number.setText(String.valueOf(sudokuPuzzle.get(i).get(j)));
                     number.setTypeface(null, Typeface.BOLD_ITALIC);
                     number.setFocusable(false);
+                    number.setTextColor(Color.BLACK);
                 }
             }
         }
