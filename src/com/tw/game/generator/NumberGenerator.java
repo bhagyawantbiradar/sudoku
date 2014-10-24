@@ -1,4 +1,4 @@
-package com.tw.game;
+package com.tw.game.generator;
 
 import java.util.List;
 

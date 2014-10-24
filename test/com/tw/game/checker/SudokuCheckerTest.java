@@ -1,5 +1,9 @@
-package com.tw.game;
+package com.tw.game.checker;
 
+import com.tw.game.checker.Checker;
+import com.tw.game.checker.SudokuChecker;
+import com.tw.game.result.*;
+import com.tw.game.result.Error;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -47,7 +51,7 @@ public class SudokuCheckerTest {
 
         assertEquals(false, result.isCorrect());
         assertEquals(3, result.getErrors().size());
-        assertEquals(new Error(0,8), result.getErrors().get(0));
+        assertEquals(new com.tw.game.result.Error(0,8), result.getErrors().get(0));
         assertEquals(new Error(3,8), result.getErrors().get(1));
         assertEquals(new Error(1,6), result.getErrors().get(2));
 

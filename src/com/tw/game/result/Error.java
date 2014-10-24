@@ -1,4 +1,4 @@
-package com.tw.game;
+package com.tw.game.result;
 
 public class Error {
     private int row, column;

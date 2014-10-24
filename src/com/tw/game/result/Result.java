@@ -1,4 +1,4 @@
-package com.tw.game;
+package com.tw.game.result;
 
 import java.util.ArrayList;
 import java.util.List;

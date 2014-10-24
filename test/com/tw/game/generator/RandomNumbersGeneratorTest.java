@@ -1,5 +1,6 @@
-package com.tw.game;
+package com.tw.game.generator;
 
+import com.tw.game.generator.RandomNumbersGenerator;
 import org.junit.Test;
 
 import java.util.*;

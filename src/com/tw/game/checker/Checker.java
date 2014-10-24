@@ -1,4 +1,6 @@
-package com.tw.game;
+package com.tw.game.checker;
+
+import com.tw.game.result.Result;
 
 import java.util.List;
 
