@@ -1,4 +1,4 @@
-package com.tw.sudoku;
+package com.tw.game;
 
 import org.junit.Test;
 

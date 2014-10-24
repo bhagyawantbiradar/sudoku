@@ -1,4 +1,4 @@
-package com.tw.sudoku;
+package com.tw.game;
 
 import android.app.Activity;
 import android.graphics.Typeface;

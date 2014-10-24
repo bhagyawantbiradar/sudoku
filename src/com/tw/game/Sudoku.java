@@ -1,4 +1,4 @@
-package com.tw.sudoku;
+package com.tw.game;
 
 import java.util.ArrayList;
 import java.util.Arrays;
