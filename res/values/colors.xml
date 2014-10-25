@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="done_background">#5d829b</color>
+    <color name="error_background">#fffe7e65</color>
 </resources>
