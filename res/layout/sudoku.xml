@@ -4,7 +4,34 @@
               android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:orientation="vertical">
+    <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/levels"
+            android:orientation="horizontal">
 
+        <RadioButton android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="easy"
+                     android:id="@+id/easy"
+                     android:onClick="onLevelChange"
+                     android:layout_weight="1"
+                     android:layout_marginLeft="10dp"
+                />
+
+        <RadioButton android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="medium"
+                     android:id="@+id/medium"
+                     android:onClick="onLevelChange"
+                     android:layout_weight="1"/>
+        <RadioButton android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="difficult"
+                     android:id="@+id/difficult"
+                     android:onClick="onLevelChange"
+                     android:layout_weight="1"/>
+    </RadioGroup>
     <TableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

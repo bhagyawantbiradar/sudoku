@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.*;
 import com.tw.game.factory.SudokuFactory;
 import com.tw.game.result.Error;
 import com.tw.game.result.Result;
@@ -25,15 +26,39 @@ import java.util.List;
 
 public class SudokuGeneratorActivity extends Activity {
     TextView selectedTextView;
+    String level = "easy";
 
     Sudoku sudoku = new Sudoku(new SudokuFactory());
     List<List<Integer>> sudokuPuzzle = sudoku.getPuzzle();
     List<List<Integer>> sudokuGrid = new ArrayList<>();
+    private Intent intent;
+    RadioButton radioButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.sudoku);
+        intent = getIntent();
+        if (intent.getExtras() == null) {
+            radioButton = (RadioButton) findViewById(R.id.easy);
+            radioButton.setChecked(true);
+        }
+        this.level = intent.getStringExtra("level");
+        if (this.level != null) {
+            if (this.level.equals("easy")) {
+                radioButton = (RadioButton) findViewById(R.id.easy);
+                radioButton.setChecked(true);
+            }
+            if (level.equals("medium")) {
+                radioButton = (RadioButton) findViewById(R.id.medium);
+                radioButton.setChecked(true);
+            }
+            if (level.equals("difficult")) {
+                radioButton = (RadioButton) findViewById(R.id.difficult);
+                radioButton.setChecked(true);
+            }
+        }
+
         sudoku.generatePuzzle();
 
         sudokuGrid.add(Arrays.asList(R.id.r0_c0, R.id.r0_c1, R.id.r0_c2, R.id.r0_c3, R.id.r0_c4, R.id.r0_c5, R.id.r0_c6, R.id.r0_c7, R.id.r0_c8));
@@ -45,6 +70,10 @@ public class SudokuGeneratorActivity extends Activity {
         sudokuGrid.add(Arrays.asList(R.id.r6_c0, R.id.r6_c1, R.id.r6_c2, R.id.r6_c3, R.id.r6_c4, R.id.r6_c5, R.id.r6_c6, R.id.r6_c7, R.id.r6_c8));
         sudokuGrid.add(Arrays.asList(R.id.r7_c0, R.id.r7_c1, R.id.r7_c2, R.id.r7_c3, R.id.r7_c4, R.id.r7_c5, R.id.r7_c6, R.id.r7_c7, R.id.r7_c8));
         sudokuGrid.add(Arrays.asList(R.id.r8_c0, R.id.r8_c1, R.id.r8_c2, R.id.r8_c3, R.id.r8_c4, R.id.r8_c5, R.id.r8_c6, R.id.r8_c7, R.id.r8_c8));
+        showPuzzle();
+    }
+
+    private void showPuzzle() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 EditText number = (EditText) findViewById(sudokuGrid.get(i).get(j));
@@ -55,8 +84,7 @@ public class SudokuGeneratorActivity extends Activity {
                     number.setFocusable(false);
                     number.setTextColor(Color.BLACK);
                 }
-                InputMethodManager imm = (InputMethodManager) getSystemService(
-                        Context.INPUT_METHOD_SERVICE);
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(number.getWindowToken(), 0);
 
                 number.setOnTouchListener(new View.OnTouchListener() {
@@ -119,12 +147,25 @@ public class SudokuGeneratorActivity extends Activity {
         }
     }
 
+    public void onLevelChange(View view) {
+
+        intent = new Intent(SudokuGeneratorActivity.this, SudokuGeneratorActivity.class);
+        intent.putExtra("level", ((RadioButton) view).getText().toString());
+
+        finish();
+        startActivity(intent);
+
+        this.sudokuPuzzle = sudoku.getPuzzle();
+        showPuzzle();
+    }
+
     private void alertMessageBuilder(String message, final Intent yesAction, final int status) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        finish();
                         startActivity(yesAction);
                     }
                 })

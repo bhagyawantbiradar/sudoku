@@ -1,7 +1,6 @@
 package com.tw.game;
 
 import com.tw.game.checker.Checker;
-import com.tw.game.checker.SolutionChecker;
 import com.tw.game.factory.Factory;
 import com.tw.game.generator.NumberGenerator;
 import com.tw.game.generator.SolutionGenerator;
