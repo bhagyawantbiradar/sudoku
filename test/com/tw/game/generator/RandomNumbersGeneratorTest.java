@@ -1,9 +1,11 @@
 package com.tw.game.generator;
 
-import com.tw.game.generator.RandomNumbersGenerator;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 

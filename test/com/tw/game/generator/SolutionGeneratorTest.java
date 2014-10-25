@@ -1,7 +1,5 @@
 package com.tw.game.generator;
 
-import com.tw.game.generator.NumberGenerator;
-import com.tw.game.generator.SolutionGenerator9X9;
 import org.junit.Test;
 
 import java.util.Arrays;
