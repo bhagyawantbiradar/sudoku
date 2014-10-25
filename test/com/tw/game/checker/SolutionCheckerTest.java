@@ -10,11 +10,11 @@ import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
 
-public class SudokuCheckerTest {
+public class SolutionCheckerTest {
 
     @Test
     public void testValidateSolutionGivesResultWithErrorsWhenSolutionIsWrong() throws Exception {
-        Checker sudokuChecker = new SudokuChecker();
+        Checker sudokuChecker = new SolutionChecker();
 
         List<List<Integer>> wrongSolution = new ArrayList<>();
         wrongSolution.add(Arrays.asList(9, 1, 8, 2, 3, 5, 7, 4, 9));
@@ -39,7 +39,7 @@ public class SudokuCheckerTest {
 
     @Test
     public void testValidateSolutionGivesResultWithErrorsWhenSolutionIsWrongInBlock() throws Exception {
-        Checker sudokuChecker = new SudokuChecker();
+        Checker sudokuChecker = new SolutionChecker();
 
         List<List<Integer>> wrongSolution = new ArrayList<>();
         wrongSolution.add(Arrays.asList(9, 1, 8, 2, 3, 5, 7, 4, 6));
@@ -66,7 +66,7 @@ public class SudokuCheckerTest {
 
     @Test
     public void testValidateSolutionGivesResult() throws Exception {
-        Checker sudokuChecker = new SudokuChecker();
+        Checker sudokuChecker = new SolutionChecker();
 
         List<List<Integer>> solution1 = new ArrayList<>();
         List<List<Integer>> solution2 = new ArrayList<>();

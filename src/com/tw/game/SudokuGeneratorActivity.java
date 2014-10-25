@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.widget.EditText;
+import com.tw.game.factory.SudokuFactory;
 import com.tw.game.generator.RandomNumbersGenerator;
 import com.tw.game.generator.SolutionGenerator9X9;
 
@@ -14,7 +15,7 @@ import java.util.List;
 
 public class SudokuGeneratorActivity extends Activity {
 
-    Sudoku sudoku = new Sudoku(new RandomNumbersGenerator(), new SolutionGenerator9X9(new RandomNumbersGenerator()));
+    Sudoku sudoku = new Sudoku(new SudokuFactory());
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -6,7 +6,7 @@ import com.tw.game.result.Result;
 import java.util.List;
 import java.util.TreeSet;
 
-public class SudokuChecker implements Checker {
+public class SolutionChecker implements Checker {
 
     @Override
     public Result validateSolution(List<List<Integer>> puzzle) {

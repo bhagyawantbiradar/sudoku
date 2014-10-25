@@ -5,17 +5,12 @@ import java.util.List;
 
 public class SolutionGenerator9X9 implements SolutionGenerator {
     private NumberGenerator generator;
-    private ArrayList<ArrayList<Integer>> solvedPuzzle = new ArrayList<>();
-
-    public ArrayList<ArrayList<Integer>> getSolvedPuzzle() {
-        return solvedPuzzle;
-    }
 
     public SolutionGenerator9X9(NumberGenerator generator) {
         this.generator = generator;
     }
 
-    public void createSolvedPuzzle() {
+    public ArrayList<ArrayList<Integer>> createSolvedPuzzle() {
         int size = 3;
         List<ArrayList<ArrayList<Integer>>> puzzle = getPuzzleWithFirstLineInserted(size);
         int[][] orders = {{1, 2, 0}, {2, 0, 1}};
@@ -24,7 +19,7 @@ public class SolutionGenerator9X9 implements SolutionGenerator {
         insertRowsInBlock(puzzle, size, orders, 3, orders[0]);
         puzzle.add(6, createCopy(puzzle.get(0)));
         insertRowsInBlock(puzzle, size, orders, 6, orders[1]);
-        formatPuzzle(puzzle);
+        return formatPuzzle(puzzle);
     }
 
     private void insertRowsInBlock(List<ArrayList<ArrayList<Integer>>> puzzle, int size, int[][] orders, int index, int[] order) {
@@ -60,12 +55,14 @@ public class SolutionGenerator9X9 implements SolutionGenerator {
         return puzzle;
     }
 
-    private void formatPuzzle(List<ArrayList<ArrayList<Integer>>> puzzle) {
+    private ArrayList<ArrayList<Integer>> formatPuzzle(List<ArrayList<ArrayList<Integer>>> puzzle) {
+        ArrayList<ArrayList<Integer>> solvedPuzzle = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
             ArrayList<Integer> numbers = new ArrayList<>();
             for (int j = 0; j < 3; j++)
                 for (int k = 0; k < 3; k++)    numbers.add(puzzle.get(i).get(j).get(k));
-            this.solvedPuzzle.add(numbers);
+            solvedPuzzle.add(numbers);
         }
+        return solvedPuzzle;
     }
 }

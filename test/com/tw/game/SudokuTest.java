@@ -1,7 +1,12 @@
 package com.tw.game;
 
+import com.tw.game.checker.Checker;
+import com.tw.game.checker.SolutionChecker;
+import com.tw.game.factory.Factory;
 import com.tw.game.generator.NumberGenerator;
+import com.tw.game.generator.SolutionGenerator;
 import com.tw.game.generator.SolutionGenerator9X9;
+import com.tw.game.result.Result;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -9,22 +14,46 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class SudokuTest {
 
+    private class SudokuFactoryStub implements Factory {
+
+        @Override
+        public SolutionGenerator getSolutionGenerator() {
+            return new SolutionGenerator9X9(new NumberGenerator() {
+                @Override
+                public List<Integer> getNumbers() {
+                    return Arrays.asList(9, 1, 8, 2, 3, 5, 7, 4, 6);
+                }
+            });
+        }
+
+        @Override
+        public Checker getSolutionChecker() {
+            return new Checker() {
+                @Override
+                public Result validateSolution(List<List<Integer>> puzzle) {
+                    return null;
+                }
+            };
+        }
+
+        @Override
+        public NumberGenerator getRandomNumberGenerator() {
+            return new NumberGenerator() {
+                @Override
+                public List<Integer> getNumbers() {
+                    return Arrays.asList(9, 1, 8, 2, 3, 5, 7, 4, 6);
+                }
+            };
+        }
+    }
+
     @Test
     public void testGeneratePuzzleCreatesAValidPuzzleFromSolution() throws Exception {
-        Sudoku sudoku = new Sudoku(new NumberGenerator() {
-            @Override
-            public List<Integer> getNumbers() {
-                return Arrays.asList(9, 1, 8, 2, 3, 5, 7, 4, 6);
-            }
-        },new SolutionGenerator9X9(new NumberGenerator() {
-            @Override
-            public List<Integer> getNumbers() {
-                return Arrays.asList(9, 1, 8, 2, 3, 5, 7, 4, 6);
-            }
-        }));
+        Sudoku sudoku = new Sudoku(new SudokuFactoryStub());
         sudoku.generatePuzzle();
         List<List<Integer>> puzzle = sudoku.getPuzzle();
 
@@ -41,5 +70,13 @@ public class SudokuTest {
                 assertEquals(expected.get(i).get(j), puzzle.get(i).get(j));
             }
         }
+    }
+
+    @Test
+    public void testSudokuValidatesTheSolution() throws Exception {
+        Sudoku sudoku = new Sudoku(new SudokuFactoryStub());
+        List<List<Integer>> solution = new ArrayList<>();
+        Result result = sudoku.validateSolution(solution);
+        assertNull(result);
     }
 }
