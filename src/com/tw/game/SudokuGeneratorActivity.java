@@ -1,19 +1,24 @@
 package com.tw.game;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import com.tw.game.factory.SudokuFactory;
-import com.tw.game.generator.RandomNumbersGenerator;
-import com.tw.game.generator.SolutionGenerator9X9;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class SudokuGeneratorActivity extends Activity {
+    TextView selectedTextView;
 
     Sudoku sudoku = new Sudoku(new SudokuFactory());
 
@@ -38,6 +43,17 @@ public class SudokuGeneratorActivity extends Activity {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 EditText number = (EditText) findViewById(sudokuGrid.get(i).get(j));
+                InputMethodManager imm = (InputMethodManager)getSystemService(
+                        Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(number.getWindowToken(), 0);
+
+                number.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View view, MotionEvent motionEvent) {
+                        selectedTextView = (TextView) view;
+                        return false;
+                    }
+                });
                 if (sudokuPuzzle.get(i).get(j) != null) {
                     number.setText(String.valueOf(sudokuPuzzle.get(i).get(j)));
                     number.setTypeface(null, Typeface.BOLD_ITALIC);
@@ -47,4 +63,10 @@ public class SudokuGeneratorActivity extends Activity {
             }
         }
     }
+
+   public void editfield(View view){
+       if (selectedTextView == null) return;
+       selectedTextView.setText(((Button) view).getText());
+   }
+
 }
