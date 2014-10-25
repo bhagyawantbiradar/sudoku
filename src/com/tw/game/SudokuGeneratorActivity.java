@@ -51,7 +51,7 @@ public class SudokuGeneratorActivity extends Activity {
                     number.setFocusable(false);
                     number.setTextColor(Color.BLACK);
                 }
-                InputMethodManager imm = (InputMethodManager)getSystemService(
+                InputMethodManager imm = (InputMethodManager) getSystemService(
                         Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(number.getWindowToken(), 0);
 
@@ -66,20 +66,25 @@ public class SudokuGeneratorActivity extends Activity {
         }
     }
 
-   public void editfield(View view){
-       if (selectedTextView == null) return;
-       selectedTextView.setText(((Button) view).getText());
-   }
+    public void editfield(View view) {
+        if (selectedTextView == null) return;
+        selectedTextView.setText(((Button) view).getText());
+    }
 
-    public void solvePuzzle(View view){
+    public void solvePuzzle(View view) {
         ArrayList<ArrayList<Integer>> solvedPuzzle = sudoku.getSolvedPuzzle();
+
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 EditText number = (EditText) findViewById(sudokuGrid.get(i).get(j));
-                    number.setText(String.valueOf(solvedPuzzle.get(i).get(j)));
-                    number.setTypeface(null, Typeface.BOLD_ITALIC);
+
+                number.setText(String.valueOf(solvedPuzzle.get(i).get(j)));
+                number.setTextColor(Color.parseColor("#2709E6"));
+                if (sudokuPuzzle.get(i).get(j) != null) {
                     number.setFocusable(false);
+                    number.setTypeface(null, Typeface.BOLD_ITALIC);
                     number.setTextColor(Color.BLACK);
+                }
             }
         }
 
