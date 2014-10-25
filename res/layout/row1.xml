@@ -13,6 +13,17 @@
                 android:stretchColumns="*"
                 android:layout_margin="1dp">
 
+
+            <TableRow android:layout_width="fill_parent">
+                <EditText style="@style/cell_style"
+                          android:id="@+id/r0_c0"/>
+                <EditText style="@style/cell_style"
+                          android:id="@+id/r0_c1"/>
+                <EditText style="@style/cell_style"
+                          android:id="@+id/r0_c2"/>
+
+            </TableRow>
+
             <TableRow android:layout_width="fill_parent">
                 <EditText style="@style/cell_style"
                           android:id="@+id/r1_c0"/>
@@ -35,15 +46,6 @@
             </TableRow>
 
 
-            <TableRow android:layout_width="fill_parent">
-                <EditText style="@style/cell_style"
-                          android:id="@+id/r0_c0"/>
-                <EditText style="@style/cell_style"
-                          android:id="@+id/r0_c1"/>
-                <EditText style="@style/cell_style"
-                          android:id="@+id/r0_c2"/>
-
-            </TableRow>
 
         </TableLayout>
 

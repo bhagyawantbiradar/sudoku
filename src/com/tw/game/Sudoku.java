@@ -15,6 +15,10 @@ public class Sudoku {
     private List<List<Integer>> puzzle = new ArrayList<>();
     private final NumberGenerator generator;
 
+    public ArrayList<ArrayList<Integer>> getSolvedPuzzle() {
+        return solvedPuzzle;
+    }
+
     public Sudoku(Factory factory) {
         this.generator = factory.getRandomNumberGenerator();
         this.solvedPuzzle = factory.getSolutionGenerator().createSolvedPuzzle();
