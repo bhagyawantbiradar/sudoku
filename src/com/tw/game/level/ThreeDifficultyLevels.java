@@ -9,9 +9,9 @@ public class ThreeDifficultyLevels implements SudokuLevels {
 
     public ThreeDifficultyLevels(String level1, String level2, String level3) {
         this.levels = new HashMap<>();
-        levels.put(level1,3);
-        levels.put(level2,4);
-        levels.put(level3,5);
+        levels.put(level1.toLowerCase(),3);
+        levels.put(level2.toLowerCase(),4);
+        levels.put(level3.toLowerCase(),5);
     }
 
     @Override

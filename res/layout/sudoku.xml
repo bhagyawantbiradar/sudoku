@@ -1,104 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:orientation="vertical">
-    <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/levels"
-            android:orientation="horizontal">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_margin="10dp"
+                  android:orientation="vertical">
+        <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/levels"
+                android:orientation="horizontal">
 
-        <RadioButton android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:text="Easy"
-                     android:id="@+id/easy"
-                     android:onClick="onLevelChange"
-                     android:layout_weight="1"
-                     android:layout_marginLeft="10dp"
-                />
+            <RadioButton android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="Easy"
+                         android:id="@+id/easy"
+                         android:onClick="onLevelChange"
+                         android:layout_weight="1"
+                         android:layout_marginLeft="10dp"
+                    />
 
-        <RadioButton android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:text="Medium"
-                     android:id="@+id/medium"
-                     android:onClick="onLevelChange"
-                     android:layout_weight="1"/>
-        <RadioButton android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:text="Difficult"
-                     android:id="@+id/difficult"
-                     android:onClick="onLevelChange"
-                     android:layout_weight="1"/>
-    </RadioGroup>
-    <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:stretchColumns="*"
-            android:background="#000000">
-     <include layout="@layout/row1"/>
-     <include layout="@layout/row2"/>
-     <include layout="@layout/row3"/>
-    </TableLayout>
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="10dp"
-            android:layout_gravity="center">
-        <Button android:layout_width="wrap_content"
-                android:text="1"
-                android:layout_height="wrap_content"
-                android:onClick="editField"/>
-        <Button android:layout_width="wrap_content"
-                android:text="2"
-                android:layout_height="wrap_content"
-                android:onClick="editField"/>
-        <Button android:layout_width="wrap_content"
-                android:text="3"
-                android:layout_height="wrap_content"
-                android:onClick="editField"/>
-        <Button android:layout_width="wrap_content"
-                android:text="4"
-                android:layout_height="wrap_content"
-                android:onClick="editField"/>
-        <Button android:layout_width="wrap_content"
-                android:text="5"
-                android:layout_height="wrap_content"
-                android:onClick="editField"/>
-    </LinearLayout>
+            <RadioButton android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="Medium"
+                         android:id="@+id/medium"
+                         android:onClick="onLevelChange"
+                         android:layout_weight="1"/>
+            <RadioButton android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="Difficult"
+                         android:id="@+id/difficult"
+                         android:onClick="onLevelChange"
+                         android:layout_weight="1"/>
+        </RadioGroup>
+        <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:stretchColumns="*"
+                android:background="#000000">
+            <include layout="@layout/row1"/>
+            <include layout="@layout/row2"/>
+            <include layout="@layout/row3"/>
+        </TableLayout>
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:layout_marginTop="20dp"
+                      android:layout_marginLeft="10dp"
+                      android:layout_gravity="center">
+            <Button android:layout_width="wrap_content"
+                    android:text="1"
+                    android:layout_height="wrap_content"
+                    android:onClick="editField"/>
+            <Button android:layout_width="wrap_content"
+                    android:text="2"
+                    android:layout_height="wrap_content"
+                    android:onClick="editField"/>
+            <Button android:layout_width="wrap_content"
+                    android:text="3"
+                    android:layout_height="wrap_content"
+                    android:onClick="editField"/>
+            <Button android:layout_width="wrap_content"
+                    android:text="4"
+                    android:layout_height="wrap_content"
+                    android:onClick="editField"/>
+            <Button android:layout_width="wrap_content"
+                    android:text="5"
+                    android:layout_height="wrap_content"
+                    android:onClick="editField"/>
+        </LinearLayout>
         <LinearLayout android:layout_width="match_parent"
                       android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_gravity="center">
+                      android:layout_marginLeft="10dp"
+                      android:layout_gravity="center">
 
 
-        <Button android:layout_width="wrap_content"
-                android:text="6"
-                android:layout_height="wrap_content"
-                android:onClick="editField"/>
-        <Button android:layout_width="wrap_content"
-                android:text="7"
-                android:layout_height="wrap_content"
-                android:onClick="editField"/>
-        <Button android:layout_width="wrap_content"
-                android:text="8"
-                android:layout_height="wrap_content"
-                android:onClick="editField"/>
-        <Button android:layout_width="wrap_content"
-                android:text="9"
-                android:layout_height="wrap_content"
-                android:onClick="editField"/>
+            <Button android:layout_width="wrap_content"
+                    android:text="6"
+                    android:layout_height="wrap_content"
+                    android:onClick="editField"/>
+            <Button android:layout_width="wrap_content"
+                    android:text="7"
+                    android:layout_height="wrap_content"
+                    android:onClick="editField"/>
+            <Button android:layout_width="wrap_content"
+                    android:text="8"
+                    android:layout_height="wrap_content"
+                    android:onClick="editField"/>
+            <Button android:layout_width="wrap_content"
+                    android:text="9"
+                    android:layout_height="wrap_content"
+                    android:onClick="editField"/>
             <Button android:layout_width="wrap_content"
                     android:text="@string/done"
                     android:onClick="showResult"
                     android:layout_height="wrap_content"
                     />
+        </LinearLayout>
+        <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="8dp"
+                android:text="Solve"
+                android:layout_gravity="center"
+                android:onClick="solvePuzzle"/>
     </LinearLayout>
-    <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="8dp"
-            android:text="Solve"
-            android:layout_gravity="center"
-            android:onClick="solvePuzzle"/>
-</LinearLayout>
+</ScrollView>

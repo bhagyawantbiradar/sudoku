@@ -21,47 +21,36 @@ import com.tw.game.level.ThreeDifficultyLevels;
 import com.tw.game.result.Error;
 import com.tw.game.result.Result;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class SudokuGeneratorActivity extends Activity {
-    TextView selectedTextView;
-    String level;
-
-    Sudoku sudoku = new Sudoku(new SudokuFactory(),new ThreeDifficultyLevels("easy","medium","difficult"));
-    List<List<Integer>> sudokuPuzzle = sudoku.getPuzzle();
-    List<List<Integer>> sudokuGrid = new ArrayList<>();
-    private Intent intent;
-    RadioButton radioButton;
+    private String easy = "Easy", medium = "Medium", difficult = "Difficult";
+    private TextView selectedTextView;
+    private String level;
+    private Sudoku sudoku = new Sudoku(new SudokuFactory(),new ThreeDifficultyLevels(easy,medium,difficult));
+    private List<List<Integer>> sudokuPuzzle = sudoku.getPuzzle();
+    private List<List<Integer>> sudokuGrid = new ArrayList<>();
+    private List<Error> errors = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.sudoku);
-        intent = getIntent();
+        Intent intent = getIntent();
         this.level = intent.getStringExtra("level");
+        Map<String, Integer> buttonAndIDs = new HashMap<>(3);
+        buttonAndIDs.put(easy, R.id.easy);
+        buttonAndIDs.put(medium, R.id.medium);
+        buttonAndIDs.put(difficult, R.id.difficult);
         if (this.level == null) {
-            this.level = "easy";
-            radioButton = (RadioButton) findViewById(R.id.easy);
-            radioButton.setChecked(true);
+            this.level = easy;
+            ((RadioButton) findViewById(R.id.easy)).setChecked(true);
         }
-        else{
-            if (this.level.equals("Easy")) {
-                radioButton = (RadioButton) findViewById(R.id.easy);
-                radioButton.setChecked(true);
-            }
-            if (this.level.equals("Medium")) {
-                radioButton = (RadioButton) findViewById(R.id.medium);
-                radioButton.setChecked(true);
-            }
-            if (this.level.equals("Difficult")) {
-                radioButton = (RadioButton) findViewById(R.id.difficult);
-                radioButton.setChecked(true);
-            }
-        }
-        sudoku.generatePuzzle(this.level);
+        else
+            for(int i=0; i < buttonAndIDs.size(); i++)
+                ((RadioButton) findViewById(buttonAndIDs.get(level))).setChecked(true);
 
+        sudoku.generatePuzzle(this.level);
         sudokuGrid.add(Arrays.asList(R.id.r0_c0, R.id.r0_c1, R.id.r0_c2, R.id.r0_c3, R.id.r0_c4, R.id.r0_c5, R.id.r0_c6, R.id.r0_c7, R.id.r0_c8));
         sudokuGrid.add(Arrays.asList(R.id.r1_c0, R.id.r1_c1, R.id.r1_c2, R.id.r1_c3, R.id.r1_c4, R.id.r1_c5, R.id.r1_c6, R.id.r1_c7, R.id.r1_c8));
         sudokuGrid.add(Arrays.asList(R.id.r2_c0, R.id.r2_c1, R.id.r2_c2, R.id.r2_c3, R.id.r2_c4, R.id.r2_c5, R.id.r2_c6, R.id.r2_c7, R.id.r2_c8));
@@ -78,16 +67,12 @@ public class SudokuGeneratorActivity extends Activity {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 EditText number = (EditText) findViewById(sudokuGrid.get(i).get(j));
-
                 if (sudokuPuzzle.get(i).get(j) != null) {
                     number.setText(String.valueOf(sudokuPuzzle.get(i).get(j)));
-                    number.setTypeface(null, Typeface.BOLD_ITALIC);
-                    number.setFocusable(false);
-                    number.setTextColor(Color.BLACK);
+                    setPropertiesForNumber(number);
                 }
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(number.getWindowToken(), 0);
-
                 number.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -97,6 +82,12 @@ public class SudokuGeneratorActivity extends Activity {
                 });
             }
         }
+    }
+
+    private void setPropertiesForNumber(EditText number) {
+        number.setTypeface(null, Typeface.BOLD_ITALIC);
+        number.setFocusable(false);
+        number.setTextColor(Color.BLACK);
     }
 
     public void editField(View view) {
@@ -113,9 +104,7 @@ public class SudokuGeneratorActivity extends Activity {
                 number.setTextColor(Color.parseColor("#2709E6"));
                 if (sudokuPuzzle.get(i).get(j) != null) {
                     number.setText(String.valueOf(solvedPuzzle.get(i).get(j)));
-                    number.setTypeface(null, Typeface.BOLD_ITALIC);
-                    number.setFocusable(false);
-                    number.setTextColor(Color.BLACK);
+                    setPropertiesForNumber(number);
                 }
             }
         }
@@ -133,48 +122,41 @@ public class SudokuGeneratorActivity extends Activity {
         Result result = this.sudoku.validateSolution(userSolution);
         if (result.isCorrect()) {
             Intent yesAction = new Intent(SudokuGeneratorActivity.this, SudokuGeneratorActivity.class);
-            alertMessageBuilder("Congratulations! You won. Do you want to start a new game?", yesAction, 0);
+            alertMessageBuilder("Congratulations! You won. Do you want to start a new game?", yesAction);
         } else {
-            for (int i = 0; i < 9; i++) {
-                for (int j = 0; j < 9; j++) {
-                    EditText number = (EditText) findViewById(sudokuGrid.get(i).get(j));
-                    if(number.getCurrentTextColor() == getResources().getColor(R.color.error_background))
-                        ((EditText) findViewById(sudokuGrid.get(i).get(j))).setTextColor(Color.parseColor("#2709E6"));
-                }
-            }
+            for (Error error : errors)
+                changeColorTo(error, Color.parseColor("#2709E6"));
             for (Error error : result.getErrors())
-                ((EditText) findViewById(sudokuGrid.get(error.getRow()).get(error.getColumn()))).setTextColor(getResources().getColor(R.color.error_background));
+                changeColorTo(error, getResources().getColor(R.color.error_background));
+            errors = result.getErrors();
             Toast.makeText(this, "Your Solution is not right.", Toast.LENGTH_LONG).show();
         }
     }
 
+    private void changeColorTo(Error error, int color) {
+        ((EditText) findViewById(sudokuGrid.get(error.getRow()).get(error.getColumn()))).setTextColor(color);
+    }
+
     public void onLevelChange(View view) {
-
-        intent = new Intent(SudokuGeneratorActivity.this, SudokuGeneratorActivity.class);
+        Intent intent = new Intent(SudokuGeneratorActivity.this, SudokuGeneratorActivity.class);
         intent.putExtra("level", ((RadioButton) view).getText().toString());
-
         finish();
         startActivity(intent);
-
         this.sudokuPuzzle = sudoku.getPuzzle();
         showPuzzle();
     }
 
-    private void alertMessageBuilder(String message, final Intent yesAction, final int status) {
+    private void alertMessageBuilder(String message, final Intent yesAction) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message)
-                .setCancelable(false)
+                .setCancelable(true)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
                         finish();
                         startActivity(yesAction);
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
-
-                    }
-                });
+                .setNegativeButton("No", null);
         final AlertDialog alert = builder.create();
         alert.show();
     }
