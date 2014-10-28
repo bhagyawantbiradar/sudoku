@@ -127,14 +127,15 @@ public class SudokuGeneratorActivity extends Activity {
             for (Error error : errors)
                 changeColorTo(error, Color.parseColor("#2709E6"));
             for (Error error : result.getErrors())
-                changeColorTo(error, getResources().getColor(R.color.error_background));
+                    changeColorTo(error, getResources().getColor(R.color.error_background));
             errors = result.getErrors();
             Toast.makeText(this, "Your Solution is not right.", Toast.LENGTH_LONG).show();
         }
     }
 
     private void changeColorTo(Error error, int color) {
-        ((EditText) findViewById(sudokuGrid.get(error.getRow()).get(error.getColumn()))).setTextColor(color);
+        if (sudokuPuzzle.get(error.getRow()).get(error.getColumn()) == null)
+            ((EditText) findViewById(sudokuGrid.get(error.getRow()).get(error.getColumn()))).setTextColor(color);
     }
 
     public void onLevelChange(View view) {
