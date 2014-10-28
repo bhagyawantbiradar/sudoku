@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.*;
 import com.tw.game.factory.SudokuFactory;
+import com.tw.game.level.ThreeDifficultyLevels;
 import com.tw.game.result.Error;
 import com.tw.game.result.Result;
 
@@ -26,9 +27,9 @@ import java.util.List;
 
 public class SudokuGeneratorActivity extends Activity {
     TextView selectedTextView;
-    String level = "easy";
+    String level;
 
-    Sudoku sudoku = new Sudoku(new SudokuFactory());
+    Sudoku sudoku = new Sudoku(new SudokuFactory(),new ThreeDifficultyLevels("easy","medium","difficult"));
     List<List<Integer>> sudokuPuzzle = sudoku.getPuzzle();
     List<List<Integer>> sudokuGrid = new ArrayList<>();
     private Intent intent;
@@ -39,27 +40,27 @@ public class SudokuGeneratorActivity extends Activity {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.sudoku);
         intent = getIntent();
-        if (intent.getExtras() == null) {
+        this.level = intent.getStringExtra("level");
+        if (this.level == null) {
+            this.level = "easy";
             radioButton = (RadioButton) findViewById(R.id.easy);
             radioButton.setChecked(true);
         }
-        this.level = intent.getStringExtra("level");
-        if (this.level != null) {
-            if (this.level.equals("easy")) {
+        else{
+            if (this.level.equals("Easy")) {
                 radioButton = (RadioButton) findViewById(R.id.easy);
                 radioButton.setChecked(true);
             }
-            if (level.equals("medium")) {
+            if (this.level.equals("Medium")) {
                 radioButton = (RadioButton) findViewById(R.id.medium);
                 radioButton.setChecked(true);
             }
-            if (level.equals("difficult")) {
+            if (this.level.equals("Difficult")) {
                 radioButton = (RadioButton) findViewById(R.id.difficult);
                 radioButton.setChecked(true);
             }
         }
-
-        sudoku.generatePuzzle();
+        sudoku.generatePuzzle(this.level);
 
         sudokuGrid.add(Arrays.asList(R.id.r0_c0, R.id.r0_c1, R.id.r0_c2, R.id.r0_c3, R.id.r0_c4, R.id.r0_c5, R.id.r0_c6, R.id.r0_c7, R.id.r0_c8));
         sudokuGrid.add(Arrays.asList(R.id.r1_c0, R.id.r1_c1, R.id.r1_c2, R.id.r1_c3, R.id.r1_c4, R.id.r1_c5, R.id.r1_c6, R.id.r1_c7, R.id.r1_c8));

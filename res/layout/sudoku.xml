@@ -12,7 +12,7 @@
 
         <RadioButton android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
-                     android:text="easy"
+                     android:text="Easy"
                      android:id="@+id/easy"
                      android:onClick="onLevelChange"
                      android:layout_weight="1"
@@ -21,13 +21,13 @@
 
         <RadioButton android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
-                     android:text="medium"
+                     android:text="Medium"
                      android:id="@+id/medium"
                      android:onClick="onLevelChange"
                      android:layout_weight="1"/>
         <RadioButton android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
-                     android:text="difficult"
+                     android:text="Difficult"
                      android:id="@+id/difficult"
                      android:onClick="onLevelChange"
                      android:layout_weight="1"/>
