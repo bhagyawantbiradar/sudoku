@@ -20,7 +20,7 @@ public class SudokuSolverActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.solver);
-        SudokuGeneratorActivity.addTextViews(this.sudokuGrid);
+        SudokuActivity.addTextViews(this.sudokuGrid);
     }
 
     public void solveUserPuzzle(View view){
@@ -34,14 +34,14 @@ public class SudokuSolverActivity extends Activity {
                     puzzle.get(i).set(j,Integer.parseInt(editText.getText().toString()));
             }
         }
-        showSolvePuzzle(new Sudoku(new SudokuFactory(),new ThreeDifficultyLevels("e","b","m")).getSolvedPuzzle());
+        showSolvePuzzle(new Sudoku(new SudokuFactory(),ThreeDifficultyLevels.getDefaultLevels()).getSolvedPuzzle());
     }
 
     private void showSolvePuzzle(ArrayList<ArrayList<Integer>> solvedPuzzle) {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 EditText number = (EditText) findViewById(sudokuGrid.get(i).get(j));
-                SudokuGeneratorActivity.showNumbers(solvedPuzzle,i,j,number,puzzle);
+                SudokuActivity.showNumbers(solvedPuzzle,i,j,number,puzzle);
             }
         }
     }

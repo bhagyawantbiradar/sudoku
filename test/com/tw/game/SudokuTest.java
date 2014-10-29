@@ -54,7 +54,7 @@ public class SudokuTest {
     @Test
     public void testGeneratePuzzleCreatesAValidPuzzleFromSolution() throws Exception {
         Sudoku sudoku = new Sudoku(new SudokuFactoryStub(),new ThreeDifficultyLevels("easy","medium","difficult"));
-        sudoku.generatePuzzle("EASY");
+        sudoku.generatePuzzle("DIFFICULT");
         List<List<Integer>> puzzle = sudoku.getPuzzle();
 
         List<List<Integer>> expected = new ArrayList<>();
@@ -73,9 +73,9 @@ public class SudokuTest {
     }
 
     @Test
-    public void testGeneratePuzzleCreatesAValidPuzzleFromSolutionWithDifficultLevel() throws Exception {
+    public void testGeneratePuzzleCreatesAValidPuzzleFromSolutionWithEasyLevel() throws Exception {
         Sudoku sudoku = new Sudoku(new SudokuFactoryStub(),new ThreeDifficultyLevels("easy","medium","difficult"));
-        sudoku.generatePuzzle("difficult");
+        sudoku.generatePuzzle("easy");
         List<List<Integer>> puzzle = sudoku.getPuzzle();
         List<List<Integer>> expected = new ArrayList<>();
 
