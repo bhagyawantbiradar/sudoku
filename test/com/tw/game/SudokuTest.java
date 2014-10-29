@@ -37,6 +37,11 @@ public class SudokuTest {
                 public Result validateSolution(List<List<Integer>> puzzle) {
                     return null;
                 }
+
+                @Override
+                public boolean isNumberValid(List<List<Integer>> puzzle, Integer number, Integer row, Integer column) {
+                    return false;
+                }
             };
         }
 
