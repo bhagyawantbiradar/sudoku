@@ -1,23 +1,12 @@
 package com.tw.game;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.os.Bundle;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.*;
-import com.tw.game.factory.SudokuFactory;
-import com.tw.game.level.ThreeDifficultyLevels;
-import com.tw.game.result.Error;
-import com.tw.game.result.Result;
+import android.widget.EditText;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class SudokuActivity{
 

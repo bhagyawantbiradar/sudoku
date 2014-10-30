@@ -101,14 +101,19 @@ public class SudokuGeneratorActivity extends Activity {
             userSolution.add(new ArrayList<Integer>());
             for (int j = 0; j < 9; j++) {
                 TextView textView = (TextView) findViewById(sudokuGrid.get(i).get(j));
-                userSolution.get(i).add(Integer.parseInt(String.valueOf(textView.getText())));
+                try {
+                    userSolution.get(i).add(Integer.parseInt(String.valueOf(textView.getText())));
+                }
+                catch (NumberFormatException e){
+                    Toast.makeText(this, "Some Blocks are empty yet.", Toast.LENGTH_LONG).show();
+                    return;
+                }
             }
         }
         Result result = this.sudoku.validateSolution(userSolution);
-        if (result.isCorrect()) {
-            Intent yesAction = new Intent(SudokuGeneratorActivity.this, SudokuGeneratorActivity.class);
-            alertMessageBuilder("Congratulations! You won. Do you want to start a new game?", yesAction);
-        } else {
+        if (result.isCorrect())
+            alertMessageBuilder("Congratulations! You won. Do you want to start a new game?", new Intent(this, SudokuGeneratorActivity.class));
+        else {
             for (Error error : errors)
                 changeColorTo(error, Color.parseColor("#2709E6"));
             for (Error error : result.getErrors())
@@ -145,8 +150,7 @@ public class SudokuGeneratorActivity extends Activity {
     }
 
     public void loadSolver(View view){
-        Intent intent = new Intent(this,SudokuSolverActivity.class);
         finish();
-        startActivity(intent);
+        startActivity(new Intent(this,SudokuSolverActivity.class));
     }
 }
