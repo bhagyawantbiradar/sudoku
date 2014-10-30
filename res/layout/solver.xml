@@ -17,25 +17,20 @@
             <include layout="@layout/row2"/>
             <include layout="@layout/row3"/>
         </TableLayout>
+        <include layout="@layout/numbers"/>
         <LinearLayout android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_marginTop="20dp"
                       tools:ignore="Orientation">
             <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
+                    android:layout_marginLeft="50dp"
                     android:text="Clear"
                     android:onClick="clearPuzzle"
                     android:layout_weight="1"/>
 
-            <Button android:layout_width="match_parent"
-                    android:layout_marginLeft="25dp"
-                    android:text="Solve"
-                    android:layout_height="wrap_content"
-                    android:onClick="solveUserPuzzle"/>
-
             <Button android:layout_width="wrap_content"
                     android:text="Load Puzzle"
-                    android:layout_marginLeft="25dp"
+                    android:layout_marginLeft="75dp"
                     android:onClick="loadPuzzle"
                     android:layout_height="wrap_content"/>
         </LinearLayout>

@@ -16,72 +16,20 @@
             <include layout="@layout/row2"/>
             <include layout="@layout/row3"/>
         </TableLayout>
-        <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="match_parent"
-                      android:layout_marginTop="20dp"
-                      android:layout_marginLeft="10dp"
-                      android:layout_gravity="center">
-            <Button android:layout_width="wrap_content"
-                    android:text="1"
-                    android:layout_height="wrap_content"
-                    android:onClick="editField"/>
-            <Button android:layout_width="wrap_content"
-                    android:text="2"
-                    android:layout_height="wrap_content"
-                    android:onClick="editField"/>
-            <Button android:layout_width="wrap_content"
-                    android:text="3"
-                    android:layout_height="wrap_content"
-                    android:onClick="editField"/>
-            <Button android:layout_width="wrap_content"
-                    android:text="4"
-                    android:layout_height="wrap_content"
-                    android:onClick="editField"/>
-            <Button android:layout_width="wrap_content"
-                    android:text="5"
-                    android:layout_height="wrap_content"
-                    android:onClick="editField"/>
-        </LinearLayout>
-        <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:layout_marginLeft="10dp"
-                      android:layout_gravity="center">
-
-            <Button android:layout_width="wrap_content"
-                    android:text="6"
-                    android:layout_height="wrap_content"
-                    android:onClick="editField"/>
-            <Button android:layout_width="wrap_content"
-                    android:text="7"
-                    android:layout_height="wrap_content"
-                    android:onClick="editField"/>
-            <Button android:layout_width="wrap_content"
-                    android:text="8"
-                    android:layout_height="wrap_content"
-                    android:onClick="editField"/>
-            <Button android:layout_width="wrap_content"
-                    android:text="9"
-                    android:layout_height="wrap_content"
-                    android:onClick="editField"/>
-            <Button android:layout_width="wrap_content"
-                    android:text="@string/done"
-                    android:onClick="showResult"
-                    android:layout_height="wrap_content"
-                    />
-        </LinearLayout>
+        <include layout="@layout/numbers"/>
         <LinearLayout android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_marginTop="20dp">
             <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:layout_marginLeft="85dp"
+                    android:layout_marginLeft="55dp"
                     android:layout_marginRight="8dp"
                     android:text="Solve"
                     android:onClick="solvePuzzle"
                     android:layout_weight="1"/>
 
             <Button android:layout_width="wrap_content"
-                    android:id="@+id/newGame"
-                    android:text="New"
+                    android:id="@+id/changeLevel"
+                    android:text="Change level"
                     android:onClick="onLevelSelection"
                     android:layout_marginLeft="50dp"
                     android:layout_height="wrap_content"

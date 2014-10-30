@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_marginTop="20dp"
+                  android:layout_marginLeft="10dp"
+                  android:layout_gravity="center">
+        <Button android:layout_width="wrap_content"
+                android:text="1"
+                android:layout_height="wrap_content"
+                android:onClick="editField"/>
+        <Button android:layout_width="wrap_content"
+                android:text="2"
+                android:layout_height="wrap_content"
+                android:onClick="editField"/>
+        <Button android:layout_width="wrap_content"
+                android:text="3"
+                android:layout_height="wrap_content"
+                android:onClick="editField"/>
+        <Button android:layout_width="wrap_content"
+                android:text="4"
+                android:layout_height="wrap_content"
+                android:onClick="editField"/>
+        <Button android:layout_width="wrap_content"
+                android:text="5"
+                android:layout_height="wrap_content"
+                android:onClick="editField"/>
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="10dp"
+                  android:layout_gravity="center">
+
+        <Button android:layout_width="wrap_content"
+                android:text="6"
+                android:layout_height="wrap_content"
+                android:onClick="editField"/>
+        <Button android:layout_width="wrap_content"
+                android:text="7"
+                android:layout_height="wrap_content"
+                android:onClick="editField"/>
+        <Button android:layout_width="wrap_content"
+                android:text="8"
+                android:layout_height="wrap_content"
+                android:onClick="editField"/>
+        <Button android:layout_width="wrap_content"
+                android:text="9"
+                android:layout_height="wrap_content"
+                android:onClick="editField"/>
+        <Button android:layout_width="wrap_content"
+                android:text="@string/done"
+                android:onClick="showResult"
+                android:layout_height="wrap_content"
+                />
+    </LinearLayout>
+</merge>
