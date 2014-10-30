@@ -6,6 +6,8 @@ import com.tw.game.generator.SolutionGenerator;
 
 public interface Factory {
     public SolutionGenerator getSolutionGenerator();
+
     public Checker getSolutionChecker();
+
     public NumberGenerator getRandomNumberGenerator();
 }

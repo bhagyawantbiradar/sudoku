@@ -6,7 +6,10 @@ import com.tw.game.generator.NumberGenerator;
 import com.tw.game.level.SudokuLevels;
 import com.tw.game.result.Result;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 public class Sudoku {
     private final ArrayList<ArrayList<Integer>> solvedPuzzle;
@@ -20,7 +23,7 @@ public class Sudoku {
         return solvedPuzzle;
     }
 
-    public Sudoku(Factory factory,SudokuLevels difficultyLevel) {
+    public Sudoku(Factory factory, SudokuLevels difficultyLevel) {
         this.difficultyLevel = difficultyLevel;
         this.generator = factory.getRandomNumberGenerator();
         this.solvedPuzzle = factory.getSolutionGenerator().createSolvedPuzzle();
@@ -41,7 +44,7 @@ public class Sudoku {
         }
     }
 
-    public Result validateSolution(List<List<Integer>> solution){
+    public Result validateSolution(List<List<Integer>> solution) {
         return this.checker.validateSolution(solution);
     }
 }

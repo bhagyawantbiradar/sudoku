@@ -10,7 +10,7 @@ public class Result {
         this.errors = new ArrayList<Error>();
     }
 
-    public void addError(Error error){
+    public void addError(Error error) {
         this.errors.add(error);
     }
 

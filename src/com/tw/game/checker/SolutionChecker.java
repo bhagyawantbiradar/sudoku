@@ -52,6 +52,7 @@ public class SolutionChecker implements Checker {
     }
 
     private void detectDuplicateValue(List<List<Integer>> puzzle, Result result, int i, TreeSet<Integer> uniqueBlock1, int j) {
-        if (!(puzzle.get(i).get(j) == null) && !uniqueBlock1.add(puzzle.get(i).get(j))) result.addError(new Error(i, j));
+        if (!(puzzle.get(i).get(j) == null) && !uniqueBlock1.add(puzzle.get(i).get(j)))
+            result.addError(new Error(i, j));
     }
 }

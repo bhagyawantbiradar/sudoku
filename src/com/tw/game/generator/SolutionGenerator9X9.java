@@ -25,8 +25,8 @@ public class SolutionGenerator9X9 implements SolutionGenerator {
     private void insertRowsInBlock(List<ArrayList<ArrayList<Integer>>> puzzle, int size, int[][] orders, int index, int[] order) {
         for (int row = 0; row < size; row++) {
             List<Integer> numbers = puzzle.get(index).get(row);
-            for (int i : order)    numbers.add(numbers.get(i));
-            for (int i = 2; i >= 0; i--)   numbers.remove(i);
+            for (int i : order) numbers.add(numbers.get(i));
+            for (int i = 2; i >= 0; i--) numbers.remove(i);
         }
         for (int[] order1 : orders)
             puzzle.add(order2dArrayElements(createCopy(puzzle.get(index)), order1));
@@ -34,13 +34,13 @@ public class SolutionGenerator9X9 implements SolutionGenerator {
 
     private ArrayList<ArrayList<Integer>> order2dArrayElements(ArrayList<ArrayList<Integer>> numbers, int[] order) {
         ArrayList<ArrayList<Integer>> list = new ArrayList<>();
-        for (int i : order)    list.add(numbers.get(i));
+        for (int i : order) list.add(numbers.get(i));
         return list;
     }
 
     private ArrayList<ArrayList<Integer>> createCopy(ArrayList<ArrayList<Integer>> numbers) {
         ArrayList<ArrayList<Integer>> copy = new ArrayList<>();
-        for (ArrayList<Integer> number : numbers)   copy.add((ArrayList<Integer>) number.clone());
+        for (ArrayList<Integer> number : numbers) copy.add((ArrayList<Integer>) number.clone());
         return copy;
     }
 
@@ -50,7 +50,8 @@ public class SolutionGenerator9X9 implements SolutionGenerator {
         puzzle.add(new ArrayList<ArrayList<Integer>>());
         for (int row = 0; row < size; row++) {
             puzzle.get(0).add(new ArrayList<Integer>());
-            for (int column = 0; column < size; column++)   puzzle.get(0).get(row).add(column, numbers.get((row * 3) + column));
+            for (int column = 0; column < size; column++)
+                puzzle.get(0).get(row).add(column, numbers.get((row * 3) + column));
         }
         return puzzle;
     }
@@ -60,7 +61,7 @@ public class SolutionGenerator9X9 implements SolutionGenerator {
         for (int i = 0; i < 9; i++) {
             ArrayList<Integer> numbers = new ArrayList<>();
             for (int j = 0; j < 3; j++)
-                for (int k = 0; k < 3; k++)    numbers.add(puzzle.get(i).get(j).get(k));
+                for (int k = 0; k < 3; k++) numbers.add(puzzle.get(i).get(j).get(k));
             solvedPuzzle.add(numbers);
         }
         return solvedPuzzle;
