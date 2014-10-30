@@ -7,34 +7,6 @@
                   android:layout_height="wrap_content"
                   android:layout_margin="10dp"
                   android:orientation="vertical">
-        <RadioGroup
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/levels"
-                android:orientation="horizontal">
-
-            <RadioButton android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:text="Easy"
-                         android:id="@+id/easy"
-                         android:onClick="onLevelChange"
-                         android:layout_weight="1"
-                         android:layout_marginLeft="10dp"
-                    />
-
-            <RadioButton android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:text="Medium"
-                         android:id="@+id/medium"
-                         android:onClick="onLevelChange"
-                         android:layout_weight="1"/>
-            <RadioButton android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:text="Difficult"
-                         android:id="@+id/difficult"
-                         android:onClick="onLevelChange"
-                         android:layout_weight="1"/>
-        </RadioGroup>
         <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -108,7 +80,9 @@
                     android:layout_weight="1"/>
 
             <Button android:layout_width="wrap_content"
+                    android:id="@+id/newGame"
                     android:text="New"
+                    android:onClick="onLevelSelection"
                     android:layout_marginLeft="50dp"
                     android:layout_height="wrap_content"
                     />

@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">Sudoku</string>
     <string name="done">Done</string>
+    <string name="easyLevel">Easy</string>
 </resources>

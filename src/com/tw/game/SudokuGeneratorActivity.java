@@ -2,6 +2,7 @@ package com.tw.game;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,19 +11,21 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+import com.tw.game.alert.AlertDialogRadio;
+import com.tw.game.alert.AlertPositiveListener;
 import com.tw.game.factory.SudokuFactory;
 import com.tw.game.level.ThreeDifficultyLevels;
 import com.tw.game.result.Error;
 import com.tw.game.result.Result;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class SudokuGeneratorActivity extends Activity {
-    private String easy = "Easy", medium = "Medium", difficult = "Difficult";
+public class SudokuGeneratorActivity extends Activity implements AlertPositiveListener {
     private TextView selectedTextView;
     private Sudoku sudoku = new Sudoku(new SudokuFactory(), ThreeDifficultyLevels.getDefaultLevels());
     private List<List<Integer>> sudokuPuzzle = sudoku.getPuzzle();
@@ -35,16 +38,20 @@ public class SudokuGeneratorActivity extends Activity {
         this.setContentView(R.layout.sudoku);
         Intent intent = getIntent();
         String level = intent.getStringExtra("level");
-        Map<String, Integer> buttonAndIDs = getDifficultyLevelMap();
-        if (level == null) {
-            level = easy;
-            ((RadioButton) findViewById(R.id.easy)).setChecked(true);
-        } else
-            for (int i = 0; i < buttonAndIDs.size(); i++)
-                ((RadioButton) findViewById(buttonAndIDs.get(level))).setChecked(true);
+        if (level == null)  level = getString(R.string.easyLevel);
         sudoku.generatePuzzle(level);
         SudokuActivity.addTextViews(this.sudokuGrid);
         showPuzzle();
+    }
+
+    public void onLevelSelection(View v) {
+        FragmentManager manager = getFragmentManager();
+        AlertDialogRadio alert = new AlertDialogRadio();
+        alert.setAlertPositiveListener(SudokuGeneratorActivity.this);
+        Bundle b = new Bundle();
+        b.putInt("position", 0);
+        alert.setArguments(b);
+        alert.show(manager, "alert_dialog_radio");
     }
 
     public void solvePuzzle(View view) {
@@ -89,24 +96,9 @@ public class SudokuGeneratorActivity extends Activity {
         startActivity(new Intent(this, SudokuSolverActivity.class));
     }
 
-    public void onLevelChange(View view) {
-        Intent intent = new Intent(SudokuGeneratorActivity.this, SudokuGeneratorActivity.class);
-        intent.putExtra("level", ((RadioButton) view).getText().toString());
-        finish();
-        startActivity(intent);
-    }
-
     public void editField(View view) {
         if (selectedTextView == null) return;
         selectedTextView.setText(((Button) view).getText());
-    }
-
-    private Map<String, Integer> getDifficultyLevelMap() {
-        Map<String, Integer> buttonAndIDs = new HashMap<>(3);
-        buttonAndIDs.put(easy, R.id.easy);
-        buttonAndIDs.put(medium, R.id.medium);
-        buttonAndIDs.put(difficult, R.id.difficult);
-        return buttonAndIDs;
     }
 
     private void showPuzzle() {
@@ -145,5 +137,13 @@ public class SudokuGeneratorActivity extends Activity {
                     }
                 }).setNegativeButton("No", null);
         builder.create().show();
+    }
+
+    @Override
+    public void onPositiveClick(String level) {
+        Intent intent = new Intent(SudokuGeneratorActivity.this, SudokuGeneratorActivity.class);
+        intent.putExtra("level", level);
+        finish();
+        startActivity(intent);
     }
 }
