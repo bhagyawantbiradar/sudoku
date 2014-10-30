@@ -1,6 +1,7 @@
 package com.tw.game;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -35,6 +36,19 @@ public class SudokuSolverActivity extends Activity {
             }
         }
         showSolvePuzzle(new Sudoku(new SudokuFactory(), ThreeDifficultyLevels.getDefaultLevels()).getSolvedPuzzle());
+    }
+
+    public void clearPuzzle(View view) {
+        for (int i = 0; i < 9; i++)
+            for (int j = 0; j < 9; j++) {
+                EditText number = (EditText) findViewById(sudokuGrid.get(i).get(j));
+                number.setText("");
+            }
+    }
+
+    public void loadPuzzle(View view) {
+        finish();
+        startActivity(new Intent(this, SudokuGeneratorActivity.class));
     }
 
     private void showSolvePuzzle(ArrayList<ArrayList<Integer>> solvedPuzzle) {

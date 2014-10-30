@@ -96,6 +96,11 @@ public class SudokuGeneratorActivity extends Activity {
         startActivity(intent);
     }
 
+    public void editField(View view) {
+        if (selectedTextView == null) return;
+        selectedTextView.setText(((Button) view).getText());
+    }
+
     private Map<String, Integer> getDifficultyLevelMap() {
         Map<String, Integer> buttonAndIDs = new HashMap<>(3);
         buttonAndIDs.put(easy, R.id.easy);
@@ -123,11 +128,6 @@ public class SudokuGeneratorActivity extends Activity {
                 });
             }
         }
-    }
-
-    public void editField(View view) {
-        if (selectedTextView == null) return;
-        selectedTextView.setText(((Button) view).getText());
     }
 
     private void changeColorTo(Error error, int color) {
