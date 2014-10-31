@@ -2,6 +2,7 @@ package com.tw.game;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.MotionEvent;
@@ -60,6 +61,13 @@ public class SudokuSolverActivity extends Activity {
                     public boolean onTouch(View view, MotionEvent motionEvent) {
                         selectedTextView = (TextView) view;
                         return false;
+                    }
+                });
+                number.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        if (hasFocus && v.getBackground().equals(Color.WHITE)) {
+                            v.setBackgroundColor(Color.parseColor("#d3d3d3"));
+                        }
                     }
                 });
             }

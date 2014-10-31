@@ -116,6 +116,13 @@ public class SudokuGeneratorActivity extends Activity implements AlertPositiveLi
                         return false;
                     }
                 });
+                number.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        if (hasFocus && v.getBackground().equals(Color.WHITE)) {
+                            v.setBackgroundColor(Color.parseColor("#d3d3d3"));
+                        }
+                    }
+                });
             }
         }
     }
