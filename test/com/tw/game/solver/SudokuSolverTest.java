@@ -44,8 +44,7 @@ public class SudokuSolverTest {
 
 
         SudokuSolver sudokuSolver = new SudokuSolver(new SolutionChecker());
-        assertTrue(sudokuSolver.solvePuzzle(this.puzzle));
-        assertEquals(solvedPuzzle, this.puzzle);
+        assertEquals(solvedPuzzle, sudokuSolver.solvePuzzle(this.puzzle));
     }
 
     @Test
@@ -75,8 +74,7 @@ public class SudokuSolverTest {
 
 
         SudokuSolver sudokuSolver = new SudokuSolver(new SolutionChecker());
-        assertTrue(sudokuSolver.solvePuzzle(this.puzzle));
-        assertEquals(solvedPuzzle, this.puzzle);
+        assertEquals(solvedPuzzle, sudokuSolver.solvePuzzle(this.puzzle));
     }
 
     @Test
@@ -106,7 +104,6 @@ public class SudokuSolverTest {
 
 
         SudokuSolver sudokuSolver = new SudokuSolver(new SolutionChecker());
-        assertTrue(sudokuSolver.solvePuzzle(this.puzzle));
-        assertEquals(solvedPuzzle, this.puzzle);
+        assertEquals(solvedPuzzle, sudokuSolver.solvePuzzle(this.puzzle));
     }
 }

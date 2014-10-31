@@ -3,6 +3,10 @@ package com.tw.game.solver;
 import com.tw.game.checker.SolutionChecker;
 import com.tw.game.result.Cell;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class SudokuSolver {
@@ -27,8 +31,20 @@ public class SudokuSolver {
         return false;
     }
 
-    public boolean solvePuzzle(List<List<Integer>> puzzle) {
-        return solve(new Cell(0, 0),puzzle);
+    public List<List<Integer>> solvePuzzle(List<List<Integer>> puzzle) {
+        List<List<Integer>> copiedPuzzle = copy(puzzle);
+        solve(new Cell(0, 0),copiedPuzzle);
+        return copiedPuzzle;
+    }
+
+    private List<List<Integer>> copy(List<List<Integer>> puzzle){
+        List<List<Integer>> copiedPuzzle = new ArrayList<>();
+        for (int i = 0; i < 9; i++) {
+            List<Integer> destination = Arrays.asList(new Integer[9]);
+            Collections.copy(destination, puzzle.get(i));
+            copiedPuzzle.add(destination);
+        }
+        return copiedPuzzle;
     }
 
     private Cell getNextCell(Cell cur) {

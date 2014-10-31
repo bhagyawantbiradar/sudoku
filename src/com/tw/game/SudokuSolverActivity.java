@@ -3,6 +3,7 @@ package com.tw.game;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.MotionEvent;
@@ -43,8 +44,7 @@ public class SudokuSolverActivity extends Activity {
             }
         }
         SudokuSolver sudokuSolver = new SudokuSolver(new SolutionChecker());
-        sudokuSolver.solvePuzzle(puzzle);
-        showSolvePuzzle(puzzle);
+        showSolvePuzzle(sudokuSolver.solvePuzzle(puzzle));
     }
 
     public void clearPuzzle(View view) {
@@ -96,9 +96,10 @@ public class SudokuSolverActivity extends Activity {
                 EditText number = (EditText) findViewById(sudokuGrid.get(i).get(j));
                 number.setText(String.valueOf(solvedPuzzle.get(i).get(j)));
                 number.setTextColor(Color.parseColor("#2709E6"));
-                if (puzzle.get(i).get(j) != null) {
+                if (puzzle.get(i).get(j) != 0) {
                     number.setText(String.valueOf(solvedPuzzle.get(i).get(j)));
-                    SudokuActivity.setProperties(number);
+                    number.setTextColor(Color.BLACK);
+                    number.setTypeface(null, Typeface.BOLD_ITALIC);;
                 }
             }
         }
