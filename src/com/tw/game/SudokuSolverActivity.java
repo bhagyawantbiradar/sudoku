@@ -85,6 +85,11 @@ public class SudokuSolverActivity extends Activity {
         selectedTextView.setText(((Button) view).getText());
     }
 
+    public void clearNumber(View view) {
+        if (selectedTextView == null) return;
+        selectedTextView.setText("");
+    }
+
     private void showSolvePuzzle(List<List<Integer>> solvedPuzzle) {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {

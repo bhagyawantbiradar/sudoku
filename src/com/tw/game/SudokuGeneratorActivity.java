@@ -105,6 +105,11 @@ public class SudokuGeneratorActivity extends Activity implements AlertPositiveLi
         selectedTextView.setText(((Button) view).getText());
     }
 
+    public void clearNumber(View view) {
+        if (selectedTextView == null) return;
+        selectedTextView.setText("");
+    }
+
     private void showPuzzle() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {

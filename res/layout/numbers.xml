@@ -33,7 +33,7 @@
                 android:text="6"
                 android:layout_height="wrap_content"
                 android:onClick="editField"/>
-        <Button android:layout_width="70dp"
+        <Button android:layout_width="60dp"
                 android:text="7"
                 android:layout_height="wrap_content"
                 android:onClick="editField"/>
@@ -45,6 +45,9 @@
                 android:text="9"
                 android:layout_height="wrap_content"
                 android:onClick="editField"/>
-
+        <Button android:layout_width="60dp"
+                android:text="Edit"
+                android:layout_height="wrap_content"
+                android:onClick="clearNumber"/>
     </LinearLayout>
 </merge>
