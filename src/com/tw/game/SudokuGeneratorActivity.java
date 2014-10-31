@@ -18,7 +18,7 @@ import com.tw.game.alert.AlertDialogRadio;
 import com.tw.game.alert.AlertPositiveListener;
 import com.tw.game.factory.SudokuFactory;
 import com.tw.game.level.ThreeDifficultyLevels;
-import com.tw.game.result.Error;
+import com.tw.game.result.Cell;
 import com.tw.game.result.Result;
 
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ public class SudokuGeneratorActivity extends Activity implements AlertPositiveLi
     private Sudoku sudoku = new Sudoku(new SudokuFactory(), ThreeDifficultyLevels.getDefaultLevels());
     private List<List<Integer>> sudokuPuzzle = sudoku.getPuzzle();
     private List<List<Integer>> sudokuGrid = new ArrayList<>();
-    private List<Error> errors = new ArrayList<>();
+    private List<Cell> cells = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,7 +58,12 @@ public class SudokuGeneratorActivity extends Activity implements AlertPositiveLi
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 EditText number = (EditText) findViewById(sudokuGrid.get(i).get(j));
-                SudokuActivity.showNumbers(solvedPuzzle, i, j, number, sudokuPuzzle);
+                number.setText(String.valueOf(solvedPuzzle.get(i).get(j)));
+                number.setTextColor(Color.parseColor("#2709E6"));
+                if (sudokuPuzzle.get(i).get(j) != null) {
+                    number.setText(String.valueOf(solvedPuzzle.get(i).get(j)));
+                    SudokuActivity.setProperties(number);
+                }
             }
         }
     }
@@ -81,11 +86,11 @@ public class SudokuGeneratorActivity extends Activity implements AlertPositiveLi
         if (result.isCorrect())
             alertMessageBuilder("Congratulations! You won. Do you want to start a new game?", new Intent(this, SudokuGeneratorActivity.class));
         else {
-            for (Error error : errors)
-                changeColorTo(error, Color.parseColor("#2709E6"));
-            for (Error error : result.getErrors())
-                changeColorTo(error, getResources().getColor(R.color.error_background));
-            errors = result.getErrors();
+            for (Cell cell : cells)
+                changeColorTo(cell, Color.parseColor("#2709E6"));
+            for (Cell cell : result.getCells())
+                changeColorTo(cell, getResources().getColor(R.color.error_background));
+            cells = result.getCells();
             Toast.makeText(this, "Your Solution is not right.", Toast.LENGTH_LONG).show();
         }
     }
@@ -127,9 +132,10 @@ public class SudokuGeneratorActivity extends Activity implements AlertPositiveLi
         }
     }
 
-    private void changeColorTo(Error error, int color) {
-        if (sudokuPuzzle.get(error.getRow()).get(error.getColumn()) == null)
-            ((EditText) findViewById(sudokuGrid.get(error.getRow()).get(error.getColumn()))).setTextColor(color);
+
+    private void changeColorTo(Cell cell, int color) {
+        if (sudokuPuzzle.get(cell.getRow()).get(cell.getColumn()) == null)
+            ((EditText) findViewById(sudokuGrid.get(cell.getRow()).get(cell.getColumn()))).setTextColor(color);
     }
 
     private void alertMessageBuilder(String message, final Intent yesAction) {

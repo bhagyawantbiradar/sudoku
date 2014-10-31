@@ -1,6 +1,6 @@
 package com.tw.game.checker;
 
-import com.tw.game.result.Error;
+import com.tw.game.result.Cell;
 import com.tw.game.result.Result;
 import org.junit.Test;
 
@@ -30,10 +30,10 @@ public class SolutionCheckerTest {
         Result result = sudokuChecker.validateSolution(wrongSolution);
 
         assertEquals(false, result.isCorrect());
-        assertEquals(3, result.getErrors().size());
-        assertEquals(new com.tw.game.result.Error(0,8), result.getErrors().get(0));
-        assertEquals(new Error(3,8), result.getErrors().get(1));
-        assertEquals(new Error(1,6), result.getErrors().get(2));
+        assertEquals(3, result.getCells().size());
+        assertEquals(new Cell(0,8), result.getCells().get(0));
+        assertEquals(new Cell(3,8), result.getCells().get(1));
+        assertEquals(new Cell(1,6), result.getCells().get(2));
 
     }
 
@@ -55,13 +55,13 @@ public class SolutionCheckerTest {
         Result result = sudokuChecker.validateSolution(wrongSolution);
 
         assertEquals(false, result.isCorrect());
-        assertEquals(6, result.getErrors().size());
-        assertEquals(new Error(7,2), result.getErrors().get(0));
-        assertEquals(new Error(4,6), result.getErrors().get(1));
-        assertEquals(new Error(8,6), result.getErrors().get(2));
-        assertEquals(new Error(8,6), result.getErrors().get(3));
-        assertEquals(new Error(4,2), result.getErrors().get(4));
-        assertEquals(new Error(8,6), result.getErrors().get(5));
+        assertEquals(6, result.getCells().size());
+        assertEquals(new Cell(7,2), result.getCells().get(0));
+        assertEquals(new Cell(4,6), result.getCells().get(1));
+        assertEquals(new Cell(8,6), result.getCells().get(2));
+        assertEquals(new Cell(8,6), result.getCells().get(3));
+        assertEquals(new Cell(4,2), result.getCells().get(4));
+        assertEquals(new Cell(8,6), result.getCells().get(5));
     }
 
     @Test
@@ -98,12 +98,12 @@ public class SolutionCheckerTest {
     }
 
     @Test
-    public void testValidateSolutionIgnoreNulls() throws Exception {
+    public void testValidateSolutionIgnore0s() throws Exception {
         Checker sudokuChecker = new SolutionChecker();
 
         List<List<Integer>> solution1 = new ArrayList<>();
-        solution1.add(Arrays.asList(6, 7, null, 4, 2, 9, 8, 3, null));
-        solution1.add(Arrays.asList(4, 8, 2, 7, 1, 3, 5, 9, null));
+        solution1.add(Arrays.asList(6, 7, 0, 4, 2, 9, 8, 3, 0));
+        solution1.add(Arrays.asList(4, 8, 2, 7, 1, 3, 5, 9, 0));
         solution1.add(Arrays.asList(9, 1, 3, 6, 5, 8, 4, 7, 2));
         solution1.add(Arrays.asList(7, 2, 8, 1, 3, 4, 9, 6, 5));
         solution1.add(Arrays.asList(1, 9, 4, 8, 6, 5, 7, 2, 3));
@@ -122,21 +122,21 @@ public class SolutionCheckerTest {
         Checker sudokuChecker = new SolutionChecker();
 
         List<List<Integer>> puzzle = new ArrayList<>();
-        puzzle.add(Arrays.asList(6, 7, null, 4, 2, 9, 8, 3, null));
-        puzzle.add(Arrays.asList(4, 8, 2, 7, 1, 3, 5, 9, null));
+        puzzle.add(Arrays.asList(6, 7, 0, 4, 2, 9, 8, 3, 0));
+        puzzle.add(Arrays.asList(4, 8, 2, 7, 1, 3, 5, 9, 0));
         puzzle.add(Arrays.asList(9, 1, 3, 6, 5, 8, 4, 7, 2));
         puzzle.add(Arrays.asList(7, 2, 8, 1, 3, 4, 9, 6, 5));
         puzzle.add(Arrays.asList(1, 9, 4, 8, 6, 5, 7, 2, 3));
         puzzle.add(Arrays.asList(5, 3, 6, 9, 7, 2, 1, 4, 8));
         puzzle.add(Arrays.asList(8, 5, 9, 2, 4, 6, 3, 1, 7));
         puzzle.add(Arrays.asList(2, 4, 7, 3, 8, 1, 6, 5, 9));
-        puzzle.add(Arrays.asList(3, 6, 1, 5, 9, null, 2, 8, 4));
+        puzzle.add(Arrays.asList(3, 6, 1, 5, 9, 0, 2, 8, 4));
 
-        boolean numberInValid = sudokuChecker.isNumberValid(puzzle, 2, 0, 2);
-        boolean numberValid = sudokuChecker.isNumberValid(puzzle, 5, 0, 2);
+        boolean numberInValid = sudokuChecker.isNumberValid(puzzle, new Cell(0, 2),2);
+        boolean numberValid = sudokuChecker.isNumberValid(puzzle, new Cell(0, 2), 5);
 
-        boolean numberInValid1 = sudokuChecker.isNumberValid(puzzle, 1, 8, 5);
-        boolean numberValid1 = sudokuChecker.isNumberValid(puzzle, 7, 8, 5);
+        boolean numberInValid1 = sudokuChecker.isNumberValid(puzzle, new Cell(8, 5),1);
+        boolean numberValid1 = sudokuChecker.isNumberValid(puzzle, new Cell(8, 5),7);
 
         assertEquals(false, numberInValid);
         assertEquals(true, numberValid);

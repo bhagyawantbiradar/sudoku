@@ -22,15 +22,6 @@ public class SudokuActivity {
         sudokuGrid.add(Arrays.asList(R.id.r8_c0, R.id.r8_c1, R.id.r8_c2, R.id.r8_c3, R.id.r8_c4, R.id.r8_c5, R.id.r8_c6, R.id.r8_c7, R.id.r8_c8));
     }
 
-    public static void showNumbers(ArrayList<ArrayList<Integer>> solvedPuzzle, int i, int j, EditText number, List<List<Integer>> sudokuPuzzle) {
-        number.setText(String.valueOf(solvedPuzzle.get(i).get(j)));
-        number.setTextColor(Color.parseColor("#2709E6"));
-        if (sudokuPuzzle.get(i).get(j) != null) {
-            number.setText(String.valueOf(solvedPuzzle.get(i).get(j)));
-            setProperties(number);
-        }
-    }
-
     public static void setProperties(EditText number) {
         number.setTypeface(null, Typeface.BOLD_ITALIC);
         number.setFocusable(false);

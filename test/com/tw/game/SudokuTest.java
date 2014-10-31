@@ -6,6 +6,7 @@ import com.tw.game.generator.NumberGenerator;
 import com.tw.game.generator.SolutionGenerator;
 import com.tw.game.generator.SolutionGenerator9X9;
 import com.tw.game.level.ThreeDifficultyLevels;
+import com.tw.game.result.Cell;
 import com.tw.game.result.Result;
 import org.junit.Test;
 
@@ -39,7 +40,7 @@ public class SudokuTest {
                 }
 
                 @Override
-                public boolean isNumberValid(List<List<Integer>> puzzle, Integer number, Integer row, Integer column) {
+                public boolean isNumberValid(List<List<Integer>> puzzle, Cell cell, Integer number) {
                     return false;
                 }
             };

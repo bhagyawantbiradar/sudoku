@@ -1,6 +1,6 @@
 package com.tw.game.checker;
 
-import com.tw.game.result.Error;
+import com.tw.game.result.Cell;
 import com.tw.game.result.Result;
 
 import java.util.List;
@@ -15,10 +15,10 @@ public class SolutionChecker implements Checker {
             TreeSet<Integer> uniqueRow = new TreeSet<>();
             TreeSet<Integer> uniqueColumn = new TreeSet<>();
             for (int j = 0; j < 9; j++) {
-                if (puzzle.get(i).get(j) == null)
+                if (puzzle.get(i).get(j) == 0)
                     continue;
                 if (!uniqueRow.add(puzzle.get(i).get(j)))
-                    result.addError(new Error(i, j));
+                    result.addError(new Cell(i, j));
                 else detectDuplicateValue(puzzle, result, j, uniqueColumn, i);
             }
         }
@@ -34,12 +34,22 @@ public class SolutionChecker implements Checker {
     }
 
     @Override
-    public boolean isNumberValid(List<List<Integer>> puzzle, Integer number, Integer row, Integer column) {
-        Integer previousValue = puzzle.get(row).get(column);
-        puzzle.get(row).set(column, number);
-        Result result = this.validateSolution(puzzle);
-        puzzle.get(row).set(column, previousValue);
-        return result.isCorrect();
+    public boolean isNumberValid(List<List<Integer>> grid,Cell cell, Integer value) {
+        for (int c = 0; c < 9; c++)
+            if (grid.get(cell.getRow()).get(c).equals(value))
+                return false;
+        for (int r = 0; r < 9; r++)
+            if (grid.get(r).get(cell.getColumn()).equals(value))
+                return false;
+        int x1 = 3 * (cell.getRow() / 3);
+        int y1 = 3 * (cell.getColumn() / 3);
+        int x2 = x1 + 2;
+        int y2 = y1 + 2;
+        for (int x = x1; x <= x2; x++)
+            for (int y = y1; y <= y2; y++)
+                if (grid.get(x).get(y).equals(value))
+                    return false;
+        return true;
     }
 
     private void checkFor(List<List<Integer>> puzzle, Result result, int i, TreeSet<Integer> uniqueBlock1, TreeSet<Integer> uniqueBlock2, TreeSet<Integer> uniqueBlock3) {
@@ -52,7 +62,7 @@ public class SolutionChecker implements Checker {
     }
 
     private void detectDuplicateValue(List<List<Integer>> puzzle, Result result, int i, TreeSet<Integer> uniqueBlock1, int j) {
-        if (!(puzzle.get(i).get(j) == null) && !uniqueBlock1.add(puzzle.get(i).get(j)))
-            result.addError(new Error(i, j));
+        if (!(puzzle.get(i).get(j) == 0) && !uniqueBlock1.add(puzzle.get(i).get(j)))
+            result.addError(new Cell(i, j));
     }
 }

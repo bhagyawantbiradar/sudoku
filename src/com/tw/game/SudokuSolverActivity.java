@@ -10,8 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import com.tw.game.factory.SudokuFactory;
-import com.tw.game.level.ThreeDifficultyLevels;
+import com.tw.game.checker.SolutionChecker;
+import com.tw.game.solver.SudokuSolver;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,12 +37,14 @@ public class SudokuSolverActivity extends Activity {
             for (int j = 0; j < 9; j++) {
                 EditText editText = (EditText) findViewById(sudokuGrid.get(i).get(j));
                 if (editText.getText().toString().equals(""))
-                    puzzle.get(i).set(j, null);
+                    puzzle.get(i).set(j, 0);
                 else
                     puzzle.get(i).set(j, Integer.parseInt(editText.getText().toString()));
             }
         }
-        showSolvePuzzle(new Sudoku(new SudokuFactory(), ThreeDifficultyLevels.getDefaultLevels()).getSolvedPuzzle());
+        SudokuSolver sudokuSolver = new SudokuSolver(new SolutionChecker());
+        sudokuSolver.solvePuzzle(puzzle);
+        showSolvePuzzle(puzzle);
     }
 
     public void clearPuzzle(View view) {
@@ -83,11 +85,16 @@ public class SudokuSolverActivity extends Activity {
         selectedTextView.setText(((Button) view).getText());
     }
 
-    private void showSolvePuzzle(ArrayList<ArrayList<Integer>> solvedPuzzle) {
+    private void showSolvePuzzle(List<List<Integer>> solvedPuzzle) {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 EditText number = (EditText) findViewById(sudokuGrid.get(i).get(j));
-                SudokuActivity.showNumbers(solvedPuzzle, i, j, number, puzzle);
+                number.setText(String.valueOf(solvedPuzzle.get(i).get(j)));
+                number.setTextColor(Color.parseColor("#2709E6"));
+                if (puzzle.get(i).get(j) != null) {
+                    number.setText(String.valueOf(solvedPuzzle.get(i).get(j)));
+                    SudokuActivity.setProperties(number);
+                }
             }
         }
     }

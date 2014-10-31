@@ -1,9 +1,9 @@
 package com.tw.game.result;
 
-public class Error {
+public class Cell {
     private int row, column;
 
-    public Error(int row, int column) {
+    public Cell(int row, int column) {
         this.row = row;
         this.column = column;
     }
@@ -14,7 +14,7 @@ public class Error {
 
     @Override
     public String toString() {
-        return "Error{" +
+        return "Cell{" +
                 "row=" + row +
                 ", column=" + column +
                 '}';
@@ -24,8 +24,8 @@ public class Error {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Error error = (Error) o;
-        return column == error.column && row == error.row;
+        Cell cell = (Cell) o;
+        return column == cell.column && row == cell.row;
     }
 
     public int getColumn() {
