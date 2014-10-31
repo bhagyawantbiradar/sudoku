@@ -1,12 +1,11 @@
 package com.tw.game;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -28,6 +27,7 @@ public class SudokuSolverActivity extends Activity {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.solver);
         SudokuActivity.addTextViews(this.sudokuGrid);
+        setEditTextProperties();
     }
 
     public void showResult(View view) {
@@ -45,12 +45,16 @@ public class SudokuSolverActivity extends Activity {
     }
 
     public void clearPuzzle(View view) {
+        setEditTextProperties();
+    }
+
+    private void setEditTextProperties() {
         for (int i = 0; i < 9; i++)
             for (int j = 0; j < 9; j++) {
                 EditText number = (EditText) findViewById(sudokuGrid.get(i).get(j));
                 number.setText("");
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(number.getWindowToken(), 0);
+                number.setInputType(InputType.TYPE_NULL);
+                number.setKeyListener(null);
                 number.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -59,7 +63,6 @@ public class SudokuSolverActivity extends Activity {
                     }
                 });
             }
-
     }
 
     public void loadPuzzle(View view) {
