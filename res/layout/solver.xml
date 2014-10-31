@@ -24,6 +24,11 @@
                       tools:ignore="Orientation"
                 android:layout_gravity="center">
             <Button android:layout_width="wrap_content"
+                    android:text="@string/done"
+                    android:onClick="showResult"
+                    android:layout_height="wrap_content"
+                    />
+            <Button android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Clear"
                     android:onClick="clearPuzzle"
