@@ -34,6 +34,7 @@ public class SudokuActivity {
     public static void setProperties(EditText number) {
         number.setTypeface(null, Typeface.BOLD_ITALIC);
         number.setFocusable(false);
+        number.setEnabled(false);
         number.setTextColor(Color.BLACK);
     }
 }
