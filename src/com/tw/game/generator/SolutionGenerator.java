@@ -1,7 +1,7 @@
 package com.tw.game.generator;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface SolutionGenerator {
-    public ArrayList<ArrayList<Integer>> createSolvedPuzzle();
+    public List<List<Integer>> createSolvedPuzzle();
 }

@@ -10,9 +10,9 @@ public class SolutionGenerator9X9 implements SolutionGenerator {
         this.generator = generator;
     }
 
-    public ArrayList<ArrayList<Integer>> createSolvedPuzzle() {
+    public List<List<Integer>> createSolvedPuzzle() {
         int size = 3;
-        List<ArrayList<ArrayList<Integer>>> puzzle = getPuzzleWithFirstLineInserted(size);
+        List<List<List<Integer>>> puzzle = getPuzzleWithFirstLineInserted(size);
         int[][] orders = {{1, 2, 0}, {2, 0, 1}};
         insertRowsInBlock(puzzle, size, orders, 0, new int[]{0, 1, 2});
         puzzle.add(3, order2dArrayElements(createCopy(puzzle.get(0)), orders[0]));
@@ -22,7 +22,7 @@ public class SolutionGenerator9X9 implements SolutionGenerator {
         return formatPuzzle(puzzle);
     }
 
-    private void insertRowsInBlock(List<ArrayList<ArrayList<Integer>>> puzzle, int size, int[][] orders, int index, int[] order) {
+    private void insertRowsInBlock(List<List<List<Integer>>> puzzle, int size, int[][] orders, int index, int[] order) {
         for (int row = 0; row < size; row++) {
             List<Integer> numbers = puzzle.get(index).get(row);
             for (int i : order) numbers.add(numbers.get(i));
@@ -32,22 +32,26 @@ public class SolutionGenerator9X9 implements SolutionGenerator {
             puzzle.add(order2dArrayElements(createCopy(puzzle.get(index)), order1));
     }
 
-    private ArrayList<ArrayList<Integer>> order2dArrayElements(ArrayList<ArrayList<Integer>> numbers, int[] order) {
-        ArrayList<ArrayList<Integer>> list = new ArrayList<>();
+    private List<List<Integer>> order2dArrayElements(List<List<Integer>> numbers, int[] order) {
+        List<List<Integer>> list = new ArrayList<>();
         for (int i : order) list.add(numbers.get(i));
         return list;
     }
 
-    private ArrayList<ArrayList<Integer>> createCopy(ArrayList<ArrayList<Integer>> numbers) {
-        ArrayList<ArrayList<Integer>> copy = new ArrayList<>();
-        for (ArrayList<Integer> number : numbers) copy.add((ArrayList<Integer>) number.clone());
+    private List<List<Integer>> createCopy(List<List<Integer>> numbers) {
+        List<List<Integer>> copy = new ArrayList<>();
+        for (List<Integer> number : numbers) {
+            List<Integer> integers = new ArrayList<>();
+            for (Integer integer : number) integers.add(integer);
+            copy.add(integers);
+        }
         return copy;
     }
 
-    private List<ArrayList<ArrayList<Integer>>> getPuzzleWithFirstLineInserted(int size) {
+    private List<List<List<Integer>>> getPuzzleWithFirstLineInserted(int size) {
         List<Integer> numbers = this.generator.getNumbers();
-        List<ArrayList<ArrayList<Integer>>> puzzle = new ArrayList<>();
-        puzzle.add(new ArrayList<ArrayList<Integer>>());
+        List<List<List<Integer>>> puzzle = new ArrayList<>();
+        puzzle.add(new ArrayList<List<Integer>>());
         for (int row = 0; row < size; row++) {
             puzzle.get(0).add(new ArrayList<Integer>());
             for (int column = 0; column < size; column++)
@@ -56,8 +60,8 @@ public class SolutionGenerator9X9 implements SolutionGenerator {
         return puzzle;
     }
 
-    private ArrayList<ArrayList<Integer>> formatPuzzle(List<ArrayList<ArrayList<Integer>>> puzzle) {
-        ArrayList<ArrayList<Integer>> solvedPuzzle = new ArrayList<>();
+    private List<List<Integer>> formatPuzzle(List<List<List<Integer>>> puzzle) {
+        List<List<Integer>> solvedPuzzle = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
             ArrayList<Integer> numbers = new ArrayList<>();
             for (int j = 0; j < 3; j++)

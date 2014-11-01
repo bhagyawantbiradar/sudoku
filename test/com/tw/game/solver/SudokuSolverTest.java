@@ -1,14 +1,14 @@
 package com.tw.game.solver;
 
 import com.tw.game.checker.SolutionChecker;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
+import static junit.framework.TestCase.assertEquals;
 
 
 public class SudokuSolverTest {
@@ -44,7 +44,13 @@ public class SudokuSolverTest {
 
 
         SudokuSolver sudokuSolver = new SudokuSolver(new SolutionChecker());
-        assertEquals(solvedPuzzle, sudokuSolver.solvePuzzle(this.puzzle));
+        List<List<Integer>> actual = sudokuSolver.solvePuzzle(this.puzzle);
+        for (int i = 0; i < 9; i++) {
+            assertEquals(9,actual.get(i).size());
+            for (int j = 0; j < 9; j++) {
+                Assert.assertEquals(solvedPuzzle.get(i).get(j), actual.get(i).get(j));
+            }
+        }
     }
 
     @Test
@@ -74,7 +80,13 @@ public class SudokuSolverTest {
 
 
         SudokuSolver sudokuSolver = new SudokuSolver(new SolutionChecker());
-        assertEquals(solvedPuzzle, sudokuSolver.solvePuzzle(this.puzzle));
+        List<List<Integer>> actual = sudokuSolver.solvePuzzle(this.puzzle);
+        for (int i = 0; i < 9; i++) {
+            assertEquals(9,actual.get(i).size());
+            for (int j = 0; j < 9; j++) {
+                Assert.assertEquals(solvedPuzzle.get(i).get(j), actual.get(i).get(j));
+            }
+        }
     }
 
     @Test
@@ -102,8 +114,13 @@ public class SudokuSolverTest {
         puzzle.add(Arrays.asList(0, 7, 0, 0, 0, 0, 0, 6, 4));
         puzzle.add(Arrays.asList(0, 0, 0, 3, 4, 0, 0, 9, 0));
 
-
         SudokuSolver sudokuSolver = new SudokuSolver(new SolutionChecker());
-        assertEquals(solvedPuzzle, sudokuSolver.solvePuzzle(this.puzzle));
+        List<List<Integer>> actual = sudokuSolver.solvePuzzle(this.puzzle);
+        for (int i = 0; i < 9; i++) {
+            assertEquals(9,actual.get(i).size());
+            for (int j = 0; j < 9; j++) {
+                Assert.assertEquals(solvedPuzzle.get(i).get(j), actual.get(i).get(j));
+            }
+        }
     }
 }

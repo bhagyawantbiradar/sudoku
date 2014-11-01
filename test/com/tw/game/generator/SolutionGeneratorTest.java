@@ -17,7 +17,7 @@ public class SolutionGeneratorTest {
                 return Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
             }
         });
-        ArrayList<ArrayList<Integer>> solvedPuzzle = solutionGenerator.createSolvedPuzzle();
+        List<List<Integer>> solvedPuzzle = solutionGenerator.createSolvedPuzzle();
         int[][] expected = {
                 {1, 2, 3, 4, 5, 6, 7, 8, 9},
                 {4, 5, 6, 7, 8, 9, 1, 2, 3},
@@ -30,6 +30,7 @@ public class SolutionGeneratorTest {
                 {9, 7, 8, 3, 1, 2, 6, 4, 5}
         };
         for (int i = 0; i < 9; i++) {
+            assertEquals(9, solvedPuzzle.get(i).size());
             for (int j = 0; j < 9; j++) {
                 assertEquals(expected[i][j], solvedPuzzle.get(i).get(j).intValue());
             }
@@ -44,7 +45,7 @@ public class SolutionGeneratorTest {
                 return Arrays.asList(9, 1, 8, 2, 3, 5, 7, 4, 6);
             }
         });
-        ArrayList<ArrayList<Integer>> solvedPuzzle = solutionGenerator.createSolvedPuzzle();
+        List<List<Integer>> solvedPuzzle = solutionGenerator.createSolvedPuzzle();
         int[][] expected = {
                 {9, 1, 8, 2, 3, 5, 7, 4, 6},
                 {2, 3, 5, 7, 4, 6, 9, 1, 8},
@@ -57,6 +58,7 @@ public class SolutionGeneratorTest {
                 {6, 7, 4, 8, 9, 1, 5, 2, 3}
         };
         for (int i = 0; i < 9; i++) {
+            assertEquals(9, solvedPuzzle.get(i).size());
             for (int j = 0; j < 9; j++) {
                 assertEquals(expected[i][j], solvedPuzzle.get(i).get(j).intValue());
             }

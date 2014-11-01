@@ -34,7 +34,7 @@ public class SolutionChecker implements Checker {
     }
 
     @Override
-    public boolean isNumberValid(List<List<Integer>> grid,Cell cell, Integer value) {
+    public boolean isNumberValid(List<List<Integer>> grid, Cell cell, Integer value) {
         for (int c = 0; c < 9; c++)
             if (grid.get(cell.getRow()).get(c).equals(value))
                 return false;

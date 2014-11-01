@@ -2,13 +2,22 @@ package com.tw.game;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import com.tw.game.result.Cell;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class SudokuActivity {
+    public static View.OnFocusChangeListener onFocusChangeListener = new View.OnFocusChangeListener() {
+        public void onFocusChange(View v, boolean hasFocus) {
+            if (hasFocus && v.getBackground().equals(Color.WHITE))
+                v.setBackgroundColor(Color.parseColor("#d3d3d3"));
+        }
+    };
 
     public static void addTextViews(List<List<Integer>> sudokuGrid) {
         sudokuGrid.add(Arrays.asList(R.id.r0_c0, R.id.r0_c1, R.id.r0_c2, R.id.r0_c3, R.id.r0_c4, R.id.r0_c5, R.id.r0_c6, R.id.r0_c7, R.id.r0_c8));
@@ -22,10 +31,26 @@ public class SudokuActivity {
         sudokuGrid.add(Arrays.asList(R.id.r8_c0, R.id.r8_c1, R.id.r8_c2, R.id.r8_c3, R.id.r8_c4, R.id.r8_c5, R.id.r8_c6, R.id.r8_c7, R.id.r8_c8));
     }
 
-    public static void setProperties(EditText number) {
-        number.setTypeface(null, Typeface.BOLD_ITALIC);
-        number.setFocusable(false);
-        number.setEnabled(false);
-        number.setTextColor(Color.BLACK);
+    public static void setProperties(List<List<Integer>> sudokuPuzzle, List<List<Integer>> solvedPuzzle, Cell cell, EditText number, Integer empty, boolean focusable) {
+        if (sudokuPuzzle.get(cell.getRow()).get(cell.getColumn()) != empty) {
+            number.setText(String.valueOf(solvedPuzzle.get(cell.getRow()).get(cell.getColumn())));
+            number.setTypeface(null, Typeface.BOLD_ITALIC);
+            number.setFocusable(focusable);
+            number.setEnabled(focusable);
+            number.setTextColor(Color.BLACK);
+        }
+    }
+
+    public static void editField(View view,TextView selectedTextView) {
+        if (selectedTextView != null) selectedTextView.setText(((Button) view).getText());
+    }
+
+    public static void clearNumber(TextView selectedTextView) {
+        if (selectedTextView != null) selectedTextView.setText("");
+    }
+
+    public static void setTextColor(List<List<Integer>> solvedPuzzle, int i, int j, EditText number) {
+        number.setText(String.valueOf(solvedPuzzle.get(i).get(j)));
+        number.setTextColor(Color.parseColor("#2709E6"));
     }
 }

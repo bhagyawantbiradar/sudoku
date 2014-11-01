@@ -12,14 +12,14 @@ import java.util.List;
 import java.util.Map;
 
 public class Sudoku {
-    private final ArrayList<ArrayList<Integer>> solvedPuzzle;
+    private final List<List<Integer>> solvedPuzzle;
     private final Checker checker;
     private List<List<Integer>> puzzle = new ArrayList<>();
     private final NumberGenerator generator;
     private SudokuLevels difficultyLevel;
 
 
-    public ArrayList<ArrayList<Integer>> getSolvedPuzzle() {
+    public List<List<Integer>> getSolvedPuzzle() {
         return solvedPuzzle;
     }
 

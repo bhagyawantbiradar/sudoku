@@ -37,7 +37,7 @@ public class SudokuGeneratorActivity extends Activity implements AlertPositiveLi
         this.setContentView(R.layout.sudoku);
         Intent intent = getIntent();
         String level = intent.getStringExtra("level");
-        if (level == null)  level = getString(R.string.easyLevel);
+        if (level == null) level = getString(R.string.easyLevel);
         sudoku.generatePuzzle(level);
         SudokuActivity.addTextViews(this.sudokuGrid);
         showPuzzle();
@@ -54,16 +54,12 @@ public class SudokuGeneratorActivity extends Activity implements AlertPositiveLi
     }
 
     public void solvePuzzle(View view) {
-        ArrayList<ArrayList<Integer>> solvedPuzzle = sudoku.getSolvedPuzzle();
+        List<List<Integer>> solvedPuzzle = sudoku.getSolvedPuzzle();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 EditText number = (EditText) findViewById(sudokuGrid.get(i).get(j));
-                number.setText(String.valueOf(solvedPuzzle.get(i).get(j)));
-                number.setTextColor(Color.parseColor("#2709E6"));
-                if (sudokuPuzzle.get(i).get(j) != null) {
-                    number.setText(String.valueOf(solvedPuzzle.get(i).get(j)));
-                    SudokuActivity.setProperties(number);
-                }
+                SudokuActivity.setTextColor(solvedPuzzle, i, j, number);
+                SudokuActivity.setProperties(sudokuPuzzle, solvedPuzzle, new Cell(i, j), number, null, false);
             }
         }
     }
@@ -101,23 +97,26 @@ public class SudokuGeneratorActivity extends Activity implements AlertPositiveLi
     }
 
     public void editField(View view) {
-        if (selectedTextView == null) return;
-        selectedTextView.setText(((Button) view).getText());
+        SudokuActivity.editField(view, selectedTextView);
     }
 
     public void clearNumber(View view) {
-        if (selectedTextView == null) return;
-        selectedTextView.setText("");
+        SudokuActivity.clearNumber(selectedTextView);
+    }
+
+    @Override
+    public void onPositiveClick(String level) {
+        Intent intent = new Intent(SudokuGeneratorActivity.this, SudokuGeneratorActivity.class);
+        intent.putExtra("level", level);
+        finish();
+        startActivity(intent);
     }
 
     private void showPuzzle() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 EditText number = (EditText) findViewById(sudokuGrid.get(i).get(j));
-                if (sudokuPuzzle.get(i).get(j) != null) {
-                    number.setText(String.valueOf(sudokuPuzzle.get(i).get(j)));
-                    SudokuActivity.setProperties(number);
-                }
+                SudokuActivity.setProperties(sudokuPuzzle, sudokuPuzzle, new Cell(i, j), number, null, false);
                 number.setInputType(InputType.TYPE_NULL);
                 number.setOnTouchListener(new View.OnTouchListener() {
                     @Override
@@ -126,17 +125,10 @@ public class SudokuGeneratorActivity extends Activity implements AlertPositiveLi
                         return false;
                     }
                 });
-                number.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                    public void onFocusChange(View v, boolean hasFocus) {
-                        if (hasFocus && v.getBackground().equals(Color.WHITE)) {
-                            v.setBackgroundColor(Color.parseColor("#d3d3d3"));
-                        }
-                    }
-                });
+                number.setOnFocusChangeListener(SudokuActivity.onFocusChangeListener);
             }
         }
     }
-
 
     private void changeColorTo(Cell cell, int color) {
         if (sudokuPuzzle.get(cell.getRow()).get(cell.getColumn()) == null)
@@ -153,13 +145,5 @@ public class SudokuGeneratorActivity extends Activity implements AlertPositiveLi
                     }
                 }).setNegativeButton("No", null);
         builder.create().show();
-    }
-
-    @Override
-    public void onPositiveClick(String level) {
-        Intent intent = new Intent(SudokuGeneratorActivity.this, SudokuGeneratorActivity.class);
-        intent.putExtra("level", level);
-        finish();
-        startActivity(intent);
     }
 }
