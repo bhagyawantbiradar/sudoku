@@ -7,7 +7,7 @@
                   android:layout_height="wrap_content"
                   android:layout_margin="10dp"
                   android:orientation="vertical"
-            android:paddingBottom="15dp">
+                  android:paddingBottom="15dp">
         <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -21,7 +21,7 @@
         <LinearLayout android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_marginTop="20dp"
-                android:layout_gravity="center">
+                      android:layout_gravity="center">
             <Button android:layout_width="wrap_content"
                     android:text="@string/done"
                     android:onClick="showResult"
@@ -32,12 +32,11 @@
                     android:onClick="solvePuzzle"
                     android:layout_weight="1"
                     />
-
-            <Button android:layout_width="wrap_content"
-                    android:id="@+id/changeLevel"
-                    android:text="Change level"
-                    android:onClick="onLevelSelection"
+            <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:prompt="@string/spinner_title"
                     />
         </LinearLayout>
         <Button android:layout_width="320dp" android:layout_height="wrap_content"

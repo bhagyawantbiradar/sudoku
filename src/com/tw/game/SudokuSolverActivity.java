@@ -2,12 +2,10 @@ package com.tw.game;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,8 +39,9 @@ public class SudokuSolverActivity extends Activity {
                 else puzzle.get(i).set(j, Integer.parseInt(editText.getText().toString()));
             }
         }
-        if (new SolutionChecker().validateSolution(puzzle).isCorrect()) showSolvePuzzle(new SudokuSolver(new SolutionChecker()).solvePuzzle(puzzle));
-        else    Toast.makeText(this, "Wrong Puzzle", Toast.LENGTH_LONG).show();
+        if (new SolutionChecker().validateSolution(puzzle).isCorrect())
+            showSolvePuzzle(new SudokuSolver(new SolutionChecker()).solvePuzzle(puzzle));
+        else Toast.makeText(this, "Wrong Puzzle", Toast.LENGTH_LONG).show();
     }
 
     public void clearPuzzle(View view) {
@@ -84,7 +83,7 @@ public class SudokuSolverActivity extends Activity {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 EditText number = (EditText) findViewById(sudokuGrid.get(i).get(j));
-                SudokuActivity.setTextColor(solvedPuzzle,i,j,number);
+                SudokuActivity.setTextColor(solvedPuzzle, i, j, number);
                 SudokuActivity.setProperties(puzzle, solvedPuzzle, new Cell(i, j), number, 0, true);
             }
         }

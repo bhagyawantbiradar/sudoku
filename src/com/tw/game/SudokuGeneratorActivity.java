@@ -2,20 +2,16 @@ package com.tw.game;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
-import com.tw.game.alert.AlertDialogRadio;
-import com.tw.game.alert.AlertPositiveListener;
+import android.widget.*;
 import com.tw.game.factory.SudokuFactory;
 import com.tw.game.level.ThreeDifficultyLevels;
 import com.tw.game.result.Cell;
@@ -24,33 +20,39 @@ import com.tw.game.result.Result;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SudokuGeneratorActivity extends Activity implements AlertPositiveListener {
+public class SudokuGeneratorActivity extends Activity implements AdapterView.OnItemSelectedListener {
     private TextView selectedTextView;
     private Sudoku sudoku = new Sudoku(new SudokuFactory(), ThreeDifficultyLevels.getDefaultLevels());
     private List<List<Integer>> sudokuPuzzle = sudoku.getPuzzle();
     private List<List<Integer>> sudokuGrid = new ArrayList<>();
     private List<Cell> cells = new ArrayList<>();
+    private String level;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.sudoku);
         Intent intent = getIntent();
-        String level = intent.getStringExtra("level");
+        level = intent.getStringExtra("level");
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.levels, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
         if (level == null) level = getString(R.string.easyLevel);
+        spinner.setOnItemSelectedListener(this);
         sudoku.generatePuzzle(level);
         SudokuActivity.addTextViews(this.sudokuGrid);
         showPuzzle();
     }
 
-    public void onLevelSelection(View v) {
-        FragmentManager manager = getFragmentManager();
-        AlertDialogRadio alert = new AlertDialogRadio();
-        alert.setAlertPositiveListener(SudokuGeneratorActivity.this);
-        Bundle b = new Bundle();
-        b.putInt("position", 0);
-        alert.setArguments(b);
-        alert.show(manager, "alert_dialog_radio");
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        menu.findItem(R.id.menu_save).setTitle("Current Level: " + level);
+        return true;
     }
 
     public void solvePuzzle(View view) {
@@ -105,11 +107,21 @@ public class SudokuGeneratorActivity extends Activity implements AlertPositiveLi
     }
 
     @Override
-    public void onPositiveClick(String level) {
-        Intent intent = new Intent(SudokuGeneratorActivity.this, SudokuGeneratorActivity.class);
-        intent.putExtra("level", level);
-        finish();
-        startActivity(intent);
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        String selState = (String) adapterView.getSelectedItem();
+        if (!selState.equals("Select Level")) {
+            Spinner spinner = (Spinner) findViewById(R.id.spinner);
+            spinner.setSelection(i);
+            Intent intent = new Intent(this, SudokuGeneratorActivity.class);
+            intent.putExtra("level", selState);
+            intent.putExtra("selection", i);
+            finish();
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
     }
 
     private void showPuzzle() {

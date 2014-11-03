@@ -45,9 +45,10 @@
                 android:text="9"
                 android:layout_height="wrap_content"
                 android:onClick="editField"/>
-        <Button android:layout_width="60dp"
+        <ImageButton android:layout_width="60dp"
                 android:text="Edit"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:src="@drawable/edit"
                 android:onClick="clearNumber"/>
     </LinearLayout>
 </merge>

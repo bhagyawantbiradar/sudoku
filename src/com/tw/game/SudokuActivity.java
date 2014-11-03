@@ -41,7 +41,7 @@ public class SudokuActivity {
         }
     }
 
-    public static void editField(View view,TextView selectedTextView) {
+    public static void editField(View view, TextView selectedTextView) {
         if (selectedTextView != null) selectedTextView.setText(((Button) view).getText());
     }
 
