@@ -35,11 +35,9 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
         Intent intent = getIntent();
         level = intent.getStringExtra("level");
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.levels, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.levels, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-
         if (level == null) level = getString(R.string.easyLevel);
         spinner.setOnItemSelectedListener(this);
         sudoku.generatePuzzle(level);
@@ -66,32 +64,6 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
         }
     }
 
-    public void showResult(View view) {
-        List<List<Integer>> userSolution = new ArrayList<>();
-        for (int i = 0; i < 9; i++) {
-            userSolution.add(new ArrayList<Integer>());
-            for (int j = 0; j < 9; j++) {
-                TextView textView = (TextView) findViewById(sudokuGrid.get(i).get(j));
-                try {
-                    userSolution.get(i).add(Integer.parseInt(String.valueOf(textView.getText())));
-                } catch (NumberFormatException e) {
-                    Toast.makeText(this, "Some Blocks are empty yet.", Toast.LENGTH_LONG).show();
-                    return;
-                }
-            }
-        }
-        Result result = this.sudoku.validateSolution(userSolution);
-        if (result.isCorrect())
-            alertMessageBuilder("Congratulations! You won. Do you want to start a new game?", new Intent(this, SudokuGeneratorActivity.class));
-        else {
-            for (Cell cell : cells)
-                changeColorTo(cell, Color.parseColor("#2709E6"));
-            for (Cell cell : result.getCells())
-                changeColorTo(cell, getResources().getColor(R.color.error_background));
-            cells = result.getCells();
-            Toast.makeText(this, "Your Solution is not right.", Toast.LENGTH_LONG).show();
-        }
-    }
 
     public void loadSolver(View view) {
         finish();
@@ -100,6 +72,7 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
 
     public void editField(View view) {
         SudokuActivity.editField(view, selectedTextView);
+        showResult();
     }
 
     public void clearNumber(View view) {
@@ -110,8 +83,6 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         String selState = (String) adapterView.getSelectedItem();
         if (!selState.equals("Select Level")) {
-            Spinner spinner = (Spinner) findViewById(R.id.spinner);
-            spinner.setSelection(i);
             Intent intent = new Intent(this, SudokuGeneratorActivity.class);
             intent.putExtra("level", selState);
             intent.putExtra("selection", i);
@@ -121,8 +92,7 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-    }
+    public void onNothingSelected(AdapterView<?> adapterView) {}
 
     private void showPuzzle() {
         for (int i = 0; i < 9; i++) {
@@ -157,5 +127,31 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
                     }
                 }).setNegativeButton("No", null);
         builder.create().show();
+    }
+
+    private void showResult() {
+        List<List<Integer>> userSolution = new ArrayList<>();
+        for (int i = 0; i < 9; i++) {
+            userSolution.add(new ArrayList<Integer>());
+            for (int j = 0; j < 9; j++) {
+                TextView textView = (TextView) findViewById(sudokuGrid.get(i).get(j));
+                try {
+                    userSolution.get(i).add(Integer.parseInt(String.valueOf(textView.getText())));
+                } catch (NumberFormatException e) {
+                    return;
+                }
+            }
+        }
+        Result result = this.sudoku.validateSolution(userSolution);
+        if (result.isCorrect())
+            alertMessageBuilder("Congratulations! You won. Do you want to start a new game?", new Intent(this, SudokuGeneratorActivity.class));
+        else {
+            for (Cell cell : cells)
+                changeColorTo(cell, Color.parseColor("#2709E6"));
+            for (Cell cell : result.getCells())
+                changeColorTo(cell, getResources().getColor(R.color.error_background));
+            cells = result.getCells();
+            Toast.makeText(this, "Your Solution is not right.", Toast.LENGTH_LONG).show();
+        }
     }
 }

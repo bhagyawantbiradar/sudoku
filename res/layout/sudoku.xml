@@ -22,11 +22,6 @@
                       android:layout_height="wrap_content"
                       android:layout_marginTop="20dp"
                       android:layout_gravity="center">
-            <Button android:layout_width="wrap_content"
-                    android:text="@string/done"
-                    android:onClick="showResult"
-                    android:layout_height="wrap_content"
-                    />
             <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
                     android:text="Solve"
                     android:onClick="solvePuzzle"
@@ -41,7 +36,7 @@
         </LinearLayout>
         <Button android:layout_width="320dp" android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Solver"
+                android:text="Load Solver"
                 android:layout_gravity="center"
                 android:onClick="loadSolver"
                 android:layout_weight="1"/>
