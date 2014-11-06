@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -28,6 +27,7 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
     private List<List<Integer>> sudokuGrid = new ArrayList<>();
     private List<Cell> cells = new ArrayList<>();
     private String level;
+    private Timer timer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,8 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
         this.setContentView(R.layout.sudoku);
 
         TextView timerValue = (TextView) findViewById(R.id.timerValue);
-        new Timer(timerValue).start(SystemClock.uptimeMillis());
+        timer = new Timer(timerValue);
+        timer.start(SystemClock.uptimeMillis());
 
         Intent intent = getIntent();
         level = intent.getStringExtra("level");
@@ -55,6 +56,8 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 confirmQuit();
+                finish();
+                startActivity(new Intent(SudokuGeneratorActivity.this, HomeActivity.class));
                 return false;
             }
         });
@@ -94,7 +97,6 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
             }
         }
     }
-
 
     public void loadSolver(View view) {
         finish();
@@ -185,8 +187,11 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
             }
         }
         Result result = this.sudoku.validateSolution(userSolution);
-        if (result.isCorrect())
-            alertMessageBuilder("Congratulations! You won. Do you want to start a new game?", new Intent(this, SudokuGeneratorActivity.class));
+        if (result.isCorrect()) {
+            String timerValue = timer.getTimerValue();
+            timer.stop();
+            alertMessageBuilder("Congratulations! You won in " + timerValue + ". Do you want to start a new game?", new Intent(this, SudokuGeneratorActivity.class));
+        }
         else {
             for (Cell cell : cells)
                 changeColorTo(cell, Color.parseColor("#2709E6"));

@@ -45,12 +45,12 @@ public class SudokuSolverActivity extends Activity {
                 } else puzzle.get(i).set(j, Integer.parseInt(editText.getText().toString()));
             }
         }
-        String message = "Do you want to solve this puzzle ?";
+        String message = "Do you want solution for this puzzle ?";
         if (!new SolutionChecker().validateSolution(puzzle).isCorrect() || count <= 0) {
             Toast.makeText(this, "Invalid Puzzle", Toast.LENGTH_LONG).show();
             return;
         } else if (count == 81)
-            message = "Do you want to solve empty Grid?";
+            message = "Do you want a solution for empty puzzle?";
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message).setCancelable(true)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
