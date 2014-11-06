@@ -143,7 +143,6 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
                         return false;
                     }
                 });
-                number.setOnFocusChangeListener(SudokuActivity.onFocusChangeListener);
             }
         }
     }

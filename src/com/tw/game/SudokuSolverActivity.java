@@ -94,7 +94,6 @@ public class SudokuSolverActivity extends Activity {
                         return false;
                     }
                 });
-                number.setOnFocusChangeListener(SudokuActivity.onFocusChangeListener);
             }
     }
 
