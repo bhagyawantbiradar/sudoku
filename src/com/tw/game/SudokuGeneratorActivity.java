@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,6 +17,7 @@ import com.tw.game.factory.SudokuFactory;
 import com.tw.game.level.ThreeDifficultyLevels;
 import com.tw.game.result.Cell;
 import com.tw.game.result.Result;
+import com.tw.game.timer.Timer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +34,10 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.sudoku);
+
+        TextView timerValue = (TextView) findViewById(R.id.timerValue);
+        new Timer(timerValue).start(SystemClock.uptimeMillis());
+
         Intent intent = getIntent();
         level = intent.getStringExtra("level");
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
@@ -103,7 +109,8 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {}
+    public void onNothingSelected(AdapterView<?> adapterView) {
+    }
 
     private void showPuzzle() {
         for (int i = 0; i < 9; i++) {
