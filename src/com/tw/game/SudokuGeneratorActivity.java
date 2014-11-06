@@ -37,12 +37,7 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
 
         Intent intent = getIntent();
         level = intent.getStringExtra("level");
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.levels, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
         if (level == null) level = getString(R.string.easyLevel);
-        spinner.setOnItemSelectedListener(this);
         sudoku.generatePuzzle(level);
         SudokuActivity.addTextViews(this.sudokuGrid);
         showPuzzle();
@@ -57,12 +52,23 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
         item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                finish();
-                startActivity(new Intent(SudokuGeneratorActivity.this,HomeActivity.class));
+                confirmQuit();
                 return false;
             }
         });
         return true;
+    }
+
+    private void confirmQuit() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Do you want to quit this puzzle?").setCancelable(true)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        finish();
+                        startActivity(new Intent(SudokuGeneratorActivity.this, HomeActivity.class));
+                    }
+                }).setNegativeButton("No", null);
+        builder.create().show();
     }
 
     public void solvePuzzle(View view) {

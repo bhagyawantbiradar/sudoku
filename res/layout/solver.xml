@@ -33,12 +33,6 @@
                     android:text="Reset"
                     android:onClick="clearPuzzle"
                     android:layout_weight="1"/>
-
-            <Button android:layout_width="wrap_content"
-                    android:text="Load Puzzle"
-                    android:onClick="loadPuzzle"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
         </LinearLayout>
 
     </LinearLayout>

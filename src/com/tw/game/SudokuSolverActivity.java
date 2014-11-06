@@ -112,11 +112,21 @@ public class SudokuSolverActivity extends Activity {
         item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                finish();
-                startActivity(new Intent(SudokuSolverActivity.this,HomeActivity.class));
+                confirmQuit();
                 return false;
             }
         });
         return true;
+    }
+    private void confirmQuit() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(SudokuSolverActivity.this);
+        builder.setMessage("Do you want to quit this puzzle?").setCancelable(true)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        finish();
+                        startActivity(new Intent(SudokuSolverActivity.this, HomeActivity.class));
+                    }
+                }).setNegativeButton("No", null);
+        builder.create().show();
     }
 }
