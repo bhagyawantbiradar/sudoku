@@ -8,10 +8,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.text.InputType;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MotionEvent;
-import android.view.View;
+import android.view.*;
 import android.widget.*;
 import com.tw.game.factory.SudokuFactory;
 import com.tw.game.level.ThreeDifficultyLevels;
@@ -55,7 +52,16 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
-        menu.findItem(R.id.menu_save).setTitle("Current Level: " + level);
+        menu.findItem(R.id.menu_save).setTitle(level);
+        MenuItem item = menu.findItem(R.id.action_search);
+        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                finish();
+                startActivity(new Intent(SudokuGeneratorActivity.this,HomeActivity.class));
+                return false;
+            }
+        });
         return true;
     }
 

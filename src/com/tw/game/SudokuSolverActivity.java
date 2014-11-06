@@ -6,8 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
-import android.view.MotionEvent;
-import android.view.View;
+import android.view.*;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -103,5 +102,21 @@ public class SudokuSolverActivity extends Activity {
                 SudokuActivity.setProperties(puzzle, solvedPuzzle, new Cell(i, j), number, 0, true);
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        MenuItem item = menu.findItem(R.id.action_search);
+        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                finish();
+                startActivity(new Intent(SudokuSolverActivity.this,HomeActivity.class));
+                return false;
+            }
+        });
+        return true;
     }
 }
