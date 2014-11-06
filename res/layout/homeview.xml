@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <Button android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="New Game"
+            android:id="@+id/generator"
+            android:onClick="onLevelSelection"/>
+
+    <Button android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="Solver"
+            android:id="@+id/solver"
+            android:onClick="loadSolver"/>
+
+
+</LinearLayout>
