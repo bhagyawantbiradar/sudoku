@@ -1,6 +1,8 @@
 package com.tw.game;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
@@ -31,17 +33,31 @@ public class SudokuSolverActivity extends Activity {
     }
 
     public void showResult(View view) {
+        int count = 0;
         for (int i = 0; i < 9; i++) {
             puzzle.add(Arrays.asList(new Integer[9]));
             for (int j = 0; j < 9; j++) {
                 EditText editText = (EditText) findViewById(sudokuGrid.get(i).get(j));
-                if (editText.getText().toString().equals("")) puzzle.get(i).set(j, 0);
-                else puzzle.get(i).set(j, Integer.parseInt(editText.getText().toString()));
+                if (editText.getText().toString().equals("")) {
+                    count++;
+                    puzzle.get(i).set(j, 0);
+                } else puzzle.get(i).set(j, Integer.parseInt(editText.getText().toString()));
             }
         }
-        if (new SolutionChecker().validateSolution(puzzle).isCorrect())
-            showSolvePuzzle(new SudokuSolver(new SolutionChecker()).solvePuzzle(puzzle));
-        else Toast.makeText(this, "Wrong Puzzle", Toast.LENGTH_LONG).show();
+        String message = "Do you want to solve this puzzle ?";
+        if (!new SolutionChecker().validateSolution(puzzle).isCorrect() || count <= 0) {
+            Toast.makeText(this, "Invalid Puzzle", Toast.LENGTH_LONG).show();
+            return;
+        } else if (count == 81)
+            message = "Do you want to solve empty Grid?";
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(message).setCancelable(true)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        showSolvePuzzle(new SudokuSolver(new SolutionChecker()).solvePuzzle(puzzle));
+                    }
+                }).setNegativeButton("No", null);
+        builder.create().show();
     }
 
     public void clearPuzzle(View view) {

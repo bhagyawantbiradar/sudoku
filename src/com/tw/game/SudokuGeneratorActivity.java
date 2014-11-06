@@ -54,6 +54,17 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
     }
 
     public void solvePuzzle(View view) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to see the solved puzzle?").setCancelable(true)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        solveAndShowPuzzle();
+                    }
+                }).setNegativeButton("No", null);
+        builder.create().show();
+    }
+
+    private void solveAndShowPuzzle() {
         List<List<Integer>> solvedPuzzle = sudoku.getSolvedPuzzle();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {

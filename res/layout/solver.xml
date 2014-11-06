@@ -24,7 +24,7 @@
                       tools:ignore="Orientation"
                 android:layout_gravity="center">
             <Button android:layout_width="wrap_content"
-                    android:text="Solve"
+                    android:text="Show Answer"
                     android:onClick="showResult"
                     android:layout_height="wrap_content"
                     />

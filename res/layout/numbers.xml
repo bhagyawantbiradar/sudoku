@@ -48,7 +48,7 @@
         <ImageButton android:layout_width="60dp"
                 android:text="Edit"
                 android:layout_height="50dp"
-                android:src="@drawable/edit"
+                android:src="@drawable/clear"
                 android:onClick="clearNumber"/>
     </LinearLayout>
 </merge>
