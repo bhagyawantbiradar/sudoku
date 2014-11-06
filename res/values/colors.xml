@@ -2,4 +2,6 @@
 <resources>
     <color name="error_background">#fffe7e65</color>
     <color name="grey">#d3d3d3</color>
+    <color name="black">#000000</color>
+    <color name="dark_grey">#A9A9A9</color>
 </resources>
