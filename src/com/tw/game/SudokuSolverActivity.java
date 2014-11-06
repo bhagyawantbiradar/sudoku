@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.*;
 import android.widget.EditText;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.tw.game.checker.SolutionChecker;
@@ -79,7 +81,7 @@ public class SudokuSolverActivity extends Activity {
     private void setEditTextProperties() {
         for (int i = 0; i < 9; i++)
             for (int j = 0; j < 9; j++) {
-                EditText number = (EditText) findViewById(sudokuGrid.get(i).get(j));
+                final EditText number = (EditText) findViewById(sudokuGrid.get(i).get(j));
                 number.setText("");
                 number.setInputType(InputType.TYPE_NULL);
                 number.setKeyListener(null);
@@ -87,11 +89,21 @@ public class SudokuSolverActivity extends Activity {
                     @Override
                     public boolean onTouch(View view, MotionEvent motionEvent) {
                         selectedTextView = (TextView) view;
+                        LayoutInflater layoutInflater = (LayoutInflater) getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+                        popUpKeypad(layoutInflater, number);
                         return false;
                     }
                 });
                 number.setOnFocusChangeListener(SudokuActivity.onFocusChangeListener);
             }
+    }
+
+    private void popUpKeypad(LayoutInflater layoutInflater, EditText number) {
+        View popupView = layoutInflater.inflate(R.layout.keypad, null);
+        PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, false);
+        popupWindow.setBackgroundDrawable(new ShapeDrawable());
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.showAsDropDown(number);
     }
 
     private void showSolvePuzzle(List<List<Integer>> solvedPuzzle) {
@@ -118,6 +130,7 @@ public class SudokuSolverActivity extends Activity {
         });
         return true;
     }
+
     private void confirmQuit() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(SudokuSolverActivity.this);
         builder.setMessage("Do you want to quit this puzzle?").setCancelable(true)

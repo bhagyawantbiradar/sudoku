@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_height="210dp"
+              android:background="#8027272d"
+              android:layout_width="match_parent">
+    <LinearLayout android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center">
+        <Button android:layout_width="50dp"
+                android:text="1"
+                android:layout_marginRight="2dp"
+                android:layout_height="wrap_content"
+                android:onClick="editField"/>
+        <Button android:layout_width="50dp"
+                android:text="2"
+                android:layout_marginRight="2dp"
+                android:layout_height="wrap_content"
+                android:onClick="editField"/>
+        <Button android:layout_width="50dp"
+                android:text="3"
+                android:layout_marginRight="2dp"
+                    android:layout_height="wrap_content"
+                android:onClick="editField"/>
+    </LinearLayout>
+    <LinearLayout android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center">
+        <Button android:layout_width="50dp"
+                android:text="4"
+                android:layout_height="wrap_content"
+                android:onClick="editField"/>
+        <Button android:layout_width="50dp"
+                android:text="5"
+                android:layout_height="wrap_content"
+                android:onClick="editField"/>
+        <Button android:layout_width="50dp"
+                android:text="6"
+                android:layout_height="wrap_content"
+                android:onClick="editField"/>
+    </LinearLayout>
+    <LinearLayout android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center">
+        <Button android:layout_width="50dp"
+                android:text="7"
+                android:layout_height="wrap_content"
+                android:onClick="editField"/>
+        <Button android:layout_width="50dp"
+                android:text="8"
+                android:layout_height="wrap_content"
+                android:onClick="editField"/>
+        <Button android:layout_width="50dp"
+                android:text="9"
+                android:layout_height="wrap_content"
+                android:onClick="editField"/>
+    </LinearLayout>
+    <LinearLayout android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center">
+        <ImageButton android:layout_width="50dp"
+                     android:text="Edit"
+                     android:layout_height="50dp"
+                     android:src="@drawable/clear"
+                     android:onClick="clearNumber"/>
+    </LinearLayout>
+</LinearLayout>

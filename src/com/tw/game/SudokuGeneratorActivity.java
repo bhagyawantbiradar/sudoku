@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.text.InputType;
@@ -127,19 +129,29 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
     private void showPuzzle() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                EditText number = (EditText) findViewById(sudokuGrid.get(i).get(j));
+                final EditText number = (EditText) findViewById(sudokuGrid.get(i).get(j));
                 SudokuActivity.setProperties(sudokuPuzzle, sudokuPuzzle, new Cell(i, j), number, null, false);
                 number.setInputType(InputType.TYPE_NULL);
                 number.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View view, MotionEvent motionEvent) {
                         selectedTextView = (TextView) view;
+                        LayoutInflater layoutInflater = (LayoutInflater) getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+                        popUpKeypad(layoutInflater, number);
                         return false;
                     }
                 });
                 number.setOnFocusChangeListener(SudokuActivity.onFocusChangeListener);
             }
         }
+    }
+
+    private void popUpKeypad(LayoutInflater layoutInflater, EditText number) {
+        View popupView = layoutInflater.inflate(R.layout.keypad, null);
+        PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, false);
+        popupWindow.setBackgroundDrawable(new ShapeDrawable());
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.showAsDropDown(number);
     }
 
     private void changeColorTo(Cell cell, int color) {
