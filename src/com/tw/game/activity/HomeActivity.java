@@ -5,11 +5,12 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import com.tw.game.R;
 import com.tw.game.alert.AlertDialogRadio;
 import com.tw.game.alert.AlertPositiveListener;
 
-public class HomeActivity extends Activity implements AlertPositiveListener {
+public class HomeActivity extends Activity implements AlertPositiveListener, AdapterView.OnItemSelectedListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,5 +39,21 @@ public class HomeActivity extends Activity implements AlertPositiveListener {
         intent.putExtra("level", level);
         finish();
         startActivity(intent);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        String selState = (String) adapterView.getSelectedItem();
+        if (!selState.equals("Select Level")) {
+            Intent intent = new Intent(this, SudokuGeneratorActivity.class);
+            intent.putExtra("level", selState);
+            intent.putExtra("selection", i);
+            finish();
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
     }
 }

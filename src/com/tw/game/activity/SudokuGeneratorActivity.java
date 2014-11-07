@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.text.InputType;
 import android.view.*;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +24,7 @@ import com.tw.game.timer.Timer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SudokuGeneratorActivity extends Activity implements AdapterView.OnItemSelectedListener {
+public class SudokuGeneratorActivity extends Activity {
     private TextView selectedTextView;
     private Sudoku sudoku = new Sudoku(new SudokuFactory(), ThreeDifficultyLevels.getDefaultLevels());
     private List<List<Integer>> sudokuPuzzle = sudoku.getPuzzle();
@@ -102,22 +101,6 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
 
     public void clearNumber(View view) {
         sudokuHelper.clearNumber(selectedTextView);
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        String selState = (String) adapterView.getSelectedItem();
-        if (!selState.equals("Select Level")) {
-            Intent intent = new Intent(this, SudokuGeneratorActivity.class);
-            intent.putExtra("level", selState);
-            intent.putExtra("selection", i);
-            finish();
-            startActivity(intent);
-        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
     }
 
     private void showPuzzle() {
