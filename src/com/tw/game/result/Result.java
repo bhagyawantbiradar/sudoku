@@ -7,7 +7,7 @@ public class Result {
     private List<Cell> cells;
 
     public Result() {
-        this.cells = new ArrayList<Cell>();
+        this.cells = new ArrayList<>();
     }
 
     public void addError(Cell cell) {

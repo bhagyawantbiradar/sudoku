@@ -1,4 +1,4 @@
-package com.tw.game.activities;
+package com.tw.game.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;

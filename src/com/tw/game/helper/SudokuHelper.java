@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import com.tw.game.activities.HomeActivity;
+import com.tw.game.activity.HomeActivity;
 import com.tw.game.R;
 import com.tw.game.result.Cell;
 

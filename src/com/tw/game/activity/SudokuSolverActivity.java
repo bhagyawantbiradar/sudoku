@@ -1,4 +1,4 @@
-package com.tw.game.activities;
+package com.tw.game.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -66,11 +66,6 @@ public class SudokuSolverActivity extends Activity {
 
     public void clearPuzzle(View view) {
         setEditTextProperties();
-    }
-
-    public void loadPuzzle(View view) {
-        finish();
-        startActivity(new Intent(this, SudokuGeneratorActivity.class));
     }
 
     public void editField(View view) {
