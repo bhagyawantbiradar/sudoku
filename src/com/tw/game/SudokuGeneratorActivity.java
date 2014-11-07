@@ -58,8 +58,6 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 confirmQuit();
-                finish();
-                startActivity(new Intent(SudokuGeneratorActivity.this, HomeActivity.class));
                 return false;
             }
         });
