@@ -4,32 +4,34 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-        android:background="@drawable/sudoku_background">
+              android:background="@drawable/sudoku_background">
+
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="SUDOKU"
-            android:layout_marginTop="25dp"
-            android:layout_gravity="center"
-            android:textSize="34sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:typeface="serif"/>
+              android:text="SUDOKU"
+              android:layout_marginTop="25dp"
+              android:layout_gravity="center"
+              android:textSize="34sp"
+              android:textColor="@color/black"
+              android:textStyle="bold"
+              android:typeface="serif"/>
 
     <Button android:layout_width="match_parent" android:layout_height="wrap_content"
             android:text="Play Game"
+            android:background="#7a7a7a"
             android:id="@+id/generator"
             android:onClick="onLevelSelection"
             android:layout_margin="20dp"
-            android:textColor="@color/black"
+            android:textColor="#000000"
             android:textStyle="bold"
-            android:typeface="serif"
-            />
+            android:typeface="serif"/>
 
     <Button android:layout_width="match_parent" android:layout_height="wrap_content"
             android:text="Solver"
             android:id="@+id/solver"
             android:onClick="loadSolver"
+            android:background="#7a7a7a"
             android:layout_margin="20dp"
-            android:textColor="@color/black"
+            android:textColor="#000000"
             android:textStyle="bold"
             android:typeface="serif"/>
 

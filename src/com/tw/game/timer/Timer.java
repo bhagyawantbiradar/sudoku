@@ -42,6 +42,7 @@ public class Timer {
                 int mins = secs / 60;
                 int hour = mins / 60;
                 secs = secs % 60;
+                mins = mins % 60;
                 timerValue.setText(String.format("%02d", hour)
                         + ":" + String.format("%02d", mins) + ":"
                         + String.format("%02d", secs));
