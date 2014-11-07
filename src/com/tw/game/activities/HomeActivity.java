@@ -1,10 +1,11 @@
-package com.tw.game;
+package com.tw.game.activities;
 
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import com.tw.game.R;
 import com.tw.game.alert.AlertDialogRadio;
 import com.tw.game.alert.AlertPositiveListener;
 

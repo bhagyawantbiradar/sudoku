@@ -1,4 +1,4 @@
-package com.tw.game;
+package com.tw.game.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -9,8 +9,14 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.text.InputType;
 import android.view.*;
-import android.widget.*;
+import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+import com.tw.game.R;
+import com.tw.game.Sudoku;
 import com.tw.game.factory.SudokuFactory;
+import com.tw.game.helper.SudokuHelper;
 import com.tw.game.level.ThreeDifficultyLevels;
 import com.tw.game.result.Cell;
 import com.tw.game.result.Result;
@@ -27,7 +33,7 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
     private List<Cell> cells = new ArrayList<>();
     private String level;
     private Timer timer;
-    private SudokuActivity sudokuActivity = new SudokuActivity();
+    private SudokuHelper sudokuHelper = new SudokuHelper();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,7 +48,7 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
         level = intent.getStringExtra("level");
         if (level == null) level = getString(R.string.easyLevel);
         sudoku.generatePuzzle(level);
-        sudokuActivity.addTextViews(this.sudokuGrid);
+        sudokuHelper.addTextViews(this.sudokuGrid);
         showPuzzle();
     }
 
@@ -55,7 +61,7 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
         item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                sudokuActivity.confirmQuit(SudokuGeneratorActivity.this);
+                sudokuHelper.confirmQuit(SudokuGeneratorActivity.this);
                 return false;
             }
         });
@@ -78,8 +84,8 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 EditText number = (EditText) findViewById(sudokuGrid.get(i).get(j));
-                sudokuActivity.setTextColor(solvedPuzzle, i, j, number);
-                sudokuActivity.setProperties(sudokuPuzzle, solvedPuzzle, new Cell(i, j), number, null, false);
+                sudokuHelper.setTextColor(solvedPuzzle, i, j, number);
+                sudokuHelper.setProperties(sudokuPuzzle, solvedPuzzle, new Cell(i, j), number, null, false);
             }
         }
     }
@@ -90,12 +96,12 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
     }
 
     public void editField(View view) {
-        sudokuActivity.editField(view, selectedTextView);
+        sudokuHelper.editField(view, selectedTextView);
         showResult();
     }
 
     public void clearNumber(View view) {
-        sudokuActivity.clearNumber(selectedTextView);
+        sudokuHelper.clearNumber(selectedTextView);
     }
 
     @Override
@@ -118,13 +124,13 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 final EditText number = (EditText) findViewById(sudokuGrid.get(i).get(j));
-                sudokuActivity.setProperties(sudokuPuzzle, sudokuPuzzle, new Cell(i, j), number, null, false);
+                sudokuHelper.setProperties(sudokuPuzzle, sudokuPuzzle, new Cell(i, j), number, null, false);
                 number.setInputType(InputType.TYPE_NULL);
                 number.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View view, MotionEvent motionEvent) {
                         selectedTextView = (TextView) view;
-                        sudokuActivity.showKeypad(number,SudokuGeneratorActivity.this);
+                        sudokuHelper.showKeypad(number, SudokuGeneratorActivity.this);
 
                         return false;
                     }
@@ -168,8 +174,7 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
             String timerValue = timer.getTimerValue();
             timer.stop();
             alertMessageBuilder("Congratulations! You won in " + timerValue + ". Do you want to start a new game?", new Intent(this, SudokuGeneratorActivity.class));
-        }
-        else {
+        } else {
             for (Cell cell : cells)
                 changeColorTo(cell, Color.parseColor("#2709E6"));
             for (Cell cell : result.getCells())

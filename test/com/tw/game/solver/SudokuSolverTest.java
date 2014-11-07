@@ -46,7 +46,7 @@ public class SudokuSolverTest {
         SudokuSolver sudokuSolver = new SudokuSolver(new SolutionChecker());
         List<List<Integer>> actual = sudokuSolver.solvePuzzle(this.puzzle);
         for (int i = 0; i < 9; i++) {
-            assertEquals(9,actual.get(i).size());
+            assertEquals(9, actual.get(i).size());
             for (int j = 0; j < 9; j++) {
                 Assert.assertEquals(solvedPuzzle.get(i).get(j), actual.get(i).get(j));
             }
@@ -82,7 +82,7 @@ public class SudokuSolverTest {
         SudokuSolver sudokuSolver = new SudokuSolver(new SolutionChecker());
         List<List<Integer>> actual = sudokuSolver.solvePuzzle(this.puzzle);
         for (int i = 0; i < 9; i++) {
-            assertEquals(9,actual.get(i).size());
+            assertEquals(9, actual.get(i).size());
             for (int j = 0; j < 9; j++) {
                 Assert.assertEquals(solvedPuzzle.get(i).get(j), actual.get(i).get(j));
             }
@@ -117,7 +117,7 @@ public class SudokuSolverTest {
         SudokuSolver sudokuSolver = new SudokuSolver(new SolutionChecker());
         List<List<Integer>> actual = sudokuSolver.solvePuzzle(this.puzzle);
         for (int i = 0; i < 9; i++) {
-            assertEquals(9,actual.get(i).size());
+            assertEquals(9, actual.get(i).size());
             for (int j = 0; j < 9; j++) {
                 Assert.assertEquals(solvedPuzzle.get(i).get(j), actual.get(i).get(j));
             }

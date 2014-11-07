@@ -1,4 +1,4 @@
-package com.tw.game;
+package com.tw.game.helper;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -16,14 +16,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import com.tw.game.activities.HomeActivity;
+import com.tw.game.R;
 import com.tw.game.result.Cell;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class SudokuActivity extends Activity{
+public class SudokuHelper {
 
-    private View popupView;
     private PopupWindow popupWindow;
 
     public void addTextViews(List<List<Integer>> sudokuGrid) {
@@ -75,9 +76,9 @@ public class SudokuActivity extends Activity{
         builder.create().show();
     }
 
-    public void showKeypad(EditText number,Context context) {
-        if(popupWindow != null) return;
-        popupView = LayoutInflater.from(context).inflate(R.layout.keypad,null);
+    public void showKeypad(EditText number, Context context) {
+        if (popupWindow != null) return;
+        View popupView = LayoutInflater.from(context).inflate(R.layout.keypad, null);
         popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         popupWindow.setBackgroundDrawable(new ShapeDrawable());
         popupWindow.setTouchInterceptor(new View.OnTouchListener() {
@@ -92,7 +93,7 @@ public class SudokuActivity extends Activity{
         popupWindow.showAsDropDown(number);
     }
 
-    public void hideKeypad(){
+    public void hideKeypad() {
         popupWindow.dismiss();
         popupWindow = null;
     }

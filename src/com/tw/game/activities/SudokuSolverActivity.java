@@ -1,8 +1,7 @@
-package com.tw.game;
+package com.tw.game.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +10,9 @@ import android.view.*;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.tw.game.R;
 import com.tw.game.checker.SolutionChecker;
+import com.tw.game.helper.SudokuHelper;
 import com.tw.game.result.Cell;
 import com.tw.game.solver.SudokuSolver;
 
@@ -24,14 +25,14 @@ public class SudokuSolverActivity extends Activity {
     private List<List<Integer>> sudokuGrid = new ArrayList<>();
     private List<List<Integer>> puzzle = new ArrayList<>();
 
-    private SudokuActivity sudokuActivity = new SudokuActivity();
+    private SudokuHelper sudokuHelper = new SudokuHelper();
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.solver);
-        sudokuActivity.addTextViews(this.sudokuGrid);
+        sudokuHelper.addTextViews(this.sudokuGrid);
         setEditTextProperties();
     }
 
@@ -73,11 +74,11 @@ public class SudokuSolverActivity extends Activity {
     }
 
     public void editField(View view) {
-        sudokuActivity.editField(view, selectedTextView);
+        sudokuHelper.editField(view, selectedTextView);
     }
 
     public void clearNumber(View view) {
-        sudokuActivity.clearNumber(selectedTextView);
+        sudokuHelper.clearNumber(selectedTextView);
     }
 
     private void setEditTextProperties() {
@@ -91,7 +92,7 @@ public class SudokuSolverActivity extends Activity {
                     @Override
                     public boolean onTouch(View view, MotionEvent motionEvent) {
                         selectedTextView = (TextView) view;
-                        sudokuActivity.showKeypad(number,SudokuSolverActivity.this);
+                        sudokuHelper.showKeypad(number, SudokuSolverActivity.this);
 
                         return false;
                     }
@@ -103,8 +104,8 @@ public class SudokuSolverActivity extends Activity {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 EditText number = (EditText) findViewById(sudokuGrid.get(i).get(j));
-                sudokuActivity.setTextColor(solvedPuzzle, i, j, number);
-                sudokuActivity.setProperties(puzzle, solvedPuzzle, new Cell(i, j), number, 0, true);
+                sudokuHelper.setTextColor(solvedPuzzle, i, j, number);
+                sudokuHelper.setProperties(puzzle, solvedPuzzle, new Cell(i, j), number, 0, true);
             }
         }
     }
@@ -117,7 +118,7 @@ public class SudokuSolverActivity extends Activity {
         item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                sudokuActivity.confirmQuit(SudokuSolverActivity.this);
+                sudokuHelper.confirmQuit(SudokuSolverActivity.this);
                 return false;
             }
         });

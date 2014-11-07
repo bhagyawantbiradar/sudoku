@@ -31,9 +31,9 @@ public class SolutionCheckerTest {
 
         assertEquals(false, result.isCorrect());
         assertEquals(3, result.getCells().size());
-        assertEquals(new Cell(0,8), result.getCells().get(0));
-        assertEquals(new Cell(3,8), result.getCells().get(1));
-        assertEquals(new Cell(1,6), result.getCells().get(2));
+        assertEquals(new Cell(0, 8), result.getCells().get(0));
+        assertEquals(new Cell(3, 8), result.getCells().get(1));
+        assertEquals(new Cell(1, 6), result.getCells().get(2));
 
     }
 
@@ -56,12 +56,12 @@ public class SolutionCheckerTest {
 
         assertEquals(false, result.isCorrect());
         assertEquals(6, result.getCells().size());
-        assertEquals(new Cell(7,2), result.getCells().get(0));
-        assertEquals(new Cell(4,6), result.getCells().get(1));
-        assertEquals(new Cell(8,6), result.getCells().get(2));
-        assertEquals(new Cell(8,6), result.getCells().get(3));
-        assertEquals(new Cell(4,2), result.getCells().get(4));
-        assertEquals(new Cell(8,6), result.getCells().get(5));
+        assertEquals(new Cell(7, 2), result.getCells().get(0));
+        assertEquals(new Cell(4, 6), result.getCells().get(1));
+        assertEquals(new Cell(8, 6), result.getCells().get(2));
+        assertEquals(new Cell(8, 6), result.getCells().get(3));
+        assertEquals(new Cell(4, 2), result.getCells().get(4));
+        assertEquals(new Cell(8, 6), result.getCells().get(5));
     }
 
     @Test
@@ -132,11 +132,11 @@ public class SolutionCheckerTest {
         puzzle.add(Arrays.asList(2, 4, 7, 3, 8, 1, 6, 5, 9));
         puzzle.add(Arrays.asList(3, 6, 1, 5, 9, 0, 2, 8, 4));
 
-        boolean numberInValid = sudokuChecker.isNumberValid(puzzle, new Cell(0, 2),2);
+        boolean numberInValid = sudokuChecker.isNumberValid(puzzle, new Cell(0, 2), 2);
         boolean numberValid = sudokuChecker.isNumberValid(puzzle, new Cell(0, 2), 5);
 
-        boolean numberInValid1 = sudokuChecker.isNumberValid(puzzle, new Cell(8, 5),1);
-        boolean numberValid1 = sudokuChecker.isNumberValid(puzzle, new Cell(8, 5),7);
+        boolean numberInValid1 = sudokuChecker.isNumberValid(puzzle, new Cell(8, 5), 1);
+        boolean numberValid1 = sudokuChecker.isNumberValid(puzzle, new Cell(8, 5), 7);
 
         assertEquals(false, numberInValid);
         assertEquals(true, numberValid);

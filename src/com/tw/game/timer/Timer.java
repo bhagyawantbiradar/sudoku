@@ -26,7 +26,7 @@ public class Timer {
     }
 
     public void stop() {
-        if (timerValue != null){
+        if (timerValue != null) {
             text = timerValue.getText().toString();
             timerValue = null;
         }

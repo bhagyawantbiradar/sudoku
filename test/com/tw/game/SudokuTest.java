@@ -59,7 +59,7 @@ public class SudokuTest {
 
     @Test
     public void testGeneratePuzzleCreatesAValidPuzzleFromSolution() throws Exception {
-        Sudoku sudoku = new Sudoku(new SudokuFactoryStub(),new ThreeDifficultyLevels("easy","medium","difficult"));
+        Sudoku sudoku = new Sudoku(new SudokuFactoryStub(), new ThreeDifficultyLevels("easy", "medium", "difficult"));
         sudoku.generatePuzzle("DIFFICULT");
         List<List<Integer>> puzzle = sudoku.getPuzzle();
 
@@ -80,7 +80,7 @@ public class SudokuTest {
 
     @Test
     public void testGeneratePuzzleCreatesAValidPuzzleFromSolutionWithEasyLevel() throws Exception {
-        Sudoku sudoku = new Sudoku(new SudokuFactoryStub(),new ThreeDifficultyLevels("easy","medium","difficult"));
+        Sudoku sudoku = new Sudoku(new SudokuFactoryStub(), new ThreeDifficultyLevels("easy", "medium", "difficult"));
         sudoku.generatePuzzle("easy");
         List<List<Integer>> puzzle = sudoku.getPuzzle();
         List<List<Integer>> expected = new ArrayList<>();
@@ -104,7 +104,7 @@ public class SudokuTest {
 
     @Test
     public void testGeneratePuzzleCreatesAValidPuzzleFromSolutionWithMediumLevel() throws Exception {
-        Sudoku sudoku = new Sudoku(new SudokuFactoryStub(),new ThreeDifficultyLevels("easy","medium","difficult"));
+        Sudoku sudoku = new Sudoku(new SudokuFactoryStub(), new ThreeDifficultyLevels("easy", "medium", "difficult"));
         sudoku.generatePuzzle("medium");
         List<List<Integer>> puzzle = sudoku.getPuzzle();
         List<List<Integer>> expected = new ArrayList<>();
@@ -126,7 +126,7 @@ public class SudokuTest {
 
     @Test
     public void testSudokuValidatesTheSolution() throws Exception {
-        Sudoku sudoku = new Sudoku(new SudokuFactoryStub(),new ThreeDifficultyLevels("easy","medium","difficult"));
+        Sudoku sudoku = new Sudoku(new SudokuFactoryStub(), new ThreeDifficultyLevels("easy", "medium", "difficult"));
         List<List<Integer>> solution = new ArrayList<>();
         Result result = sudoku.validateSolution(solution);
         assertNull(result);
