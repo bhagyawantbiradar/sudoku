@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.text.InputType;
@@ -28,8 +27,7 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
     private List<Cell> cells = new ArrayList<>();
     private String level;
     private Timer timer;
-    private View popupView;
-    private PopupWindow popupWindow;
+    private SudokuActivity sudokuActivity = new SudokuActivity();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,7 +42,7 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
         level = intent.getStringExtra("level");
         if (level == null) level = getString(R.string.easyLevel);
         sudoku.generatePuzzle(level);
-        SudokuActivity.addTextViews(this.sudokuGrid);
+        sudokuActivity.addTextViews(this.sudokuGrid);
         showPuzzle();
     }
 
@@ -57,23 +55,11 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
         item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                confirmQuit();
+                sudokuActivity.confirmQuit(SudokuGeneratorActivity.this);
                 return false;
             }
         });
         return true;
-    }
-
-    private void confirmQuit() {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Do you want to quit this puzzle?").setCancelable(true)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
-                        finish();
-                        startActivity(new Intent(SudokuGeneratorActivity.this, HomeActivity.class));
-                    }
-                }).setNegativeButton("No", null);
-        builder.create().show();
     }
 
     public void solvePuzzle(View view) {
@@ -92,8 +78,8 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 EditText number = (EditText) findViewById(sudokuGrid.get(i).get(j));
-                SudokuActivity.setTextColor(solvedPuzzle, i, j, number);
-                SudokuActivity.setProperties(sudokuPuzzle, solvedPuzzle, new Cell(i, j), number, null, false);
+                sudokuActivity.setTextColor(solvedPuzzle, i, j, number);
+                sudokuActivity.setProperties(sudokuPuzzle, solvedPuzzle, new Cell(i, j), number, null, false);
             }
         }
     }
@@ -104,16 +90,12 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
     }
 
     public void editField(View view) {
-        SudokuActivity.editField(view, selectedTextView);
-        popupWindow.dismiss();
-        popupWindow = null;
+        sudokuActivity.editField(view, selectedTextView);
         showResult();
     }
 
     public void clearNumber(View view) {
-        SudokuActivity.clearNumber(selectedTextView);
-        popupWindow.dismiss();
-        popupWindow = null;
+        sudokuActivity.clearNumber(selectedTextView);
     }
 
     @Override
@@ -136,36 +118,19 @@ public class SudokuGeneratorActivity extends Activity implements AdapterView.OnI
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 final EditText number = (EditText) findViewById(sudokuGrid.get(i).get(j));
-                SudokuActivity.setProperties(sudokuPuzzle, sudokuPuzzle, new Cell(i, j), number, null, false);
+                sudokuActivity.setProperties(sudokuPuzzle, sudokuPuzzle, new Cell(i, j), number, null, false);
                 number.setInputType(InputType.TYPE_NULL);
                 number.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View view, MotionEvent motionEvent) {
                         selectedTextView = (TextView) view;
-                        if (popupWindow == null)
-                            popUpKeypad(number);
+                        sudokuActivity.showKeypad(number,SudokuGeneratorActivity.this);
 
                         return false;
                     }
                 });
             }
         }
-    }
-
-    private void popUpKeypad(EditText number) {
-        popupView = getLayoutInflater().inflate(R.layout.keypad, null);
-        popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        popupWindow.setBackgroundDrawable(new ShapeDrawable());
-        popupWindow.setTouchInterceptor(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (motionEvent.getAction() == MotionEvent.ACTION_OUTSIDE)
-                    popupWindow = null;
-                return false;
-            }
-        });
-        popupWindow.setOutsideTouchable(true);
-        popupWindow.showAsDropDown(number);
     }
 
     private void changeColorTo(Cell cell, int color) {
