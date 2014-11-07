@@ -24,6 +24,9 @@ public class SudokuSolverActivity extends Activity {
     private TextView selectedTextView;
     private List<List<Integer>> sudokuGrid = new ArrayList<>();
     private List<List<Integer>> puzzle = new ArrayList<>();
+    private View popupView;
+    private PopupWindow popupWindow;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,10 +75,14 @@ public class SudokuSolverActivity extends Activity {
 
     public void editField(View view) {
         SudokuActivity.editField(view, selectedTextView);
+        popupWindow.dismiss();
+        popupWindow = null;
     }
 
     public void clearNumber(View view) {
         SudokuActivity.clearNumber(selectedTextView);
+        popupWindow.dismiss();
+        popupWindow = null;
     }
 
     private void setEditTextProperties() {
@@ -89,18 +96,27 @@ public class SudokuSolverActivity extends Activity {
                     @Override
                     public boolean onTouch(View view, MotionEvent motionEvent) {
                         selectedTextView = (TextView) view;
-                        LayoutInflater layoutInflater = (LayoutInflater) getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-                        popUpKeypad(layoutInflater, number);
+                        if (popupWindow == null)
+                            popUpKeypad(number);
+
                         return false;
                     }
                 });
             }
     }
 
-    private void popUpKeypad(LayoutInflater layoutInflater, EditText number) {
-        View popupView = layoutInflater.inflate(R.layout.keypad, null);
-        PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, false);
+    private void popUpKeypad(EditText number) {
+        popupView = getLayoutInflater().inflate(R.layout.keypad, null);
+        popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         popupWindow.setBackgroundDrawable(new ShapeDrawable());
+        popupWindow.setTouchInterceptor(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_OUTSIDE)
+                    popupWindow = null;
+                return false;
+            }
+        });
         popupWindow.setOutsideTouchable(true);
         popupWindow.showAsDropDown(number);
     }
