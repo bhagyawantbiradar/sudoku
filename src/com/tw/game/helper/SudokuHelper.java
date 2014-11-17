@@ -16,8 +16,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import com.tw.game.activity.HomeActivity;
 import com.tw.game.R;
+import com.tw.game.activity.HomeActivity;
+import com.tw.game.activity.SudokuGeneratorActivity;
 import com.tw.game.result.Cell;
 
 import java.util.Arrays;
@@ -66,9 +67,11 @@ public class SudokuHelper {
 
     public void confirmQuit(final Activity activity) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setMessage("Do you want to quit this puzzle?").setCancelable(true)
+        builder.setMessage("Do you want to save game and exit?").setCancelable(true)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        if (activity.getClass() == SudokuGeneratorActivity.class)
+                            ((SudokuGeneratorActivity) activity).saveGame();
                         activity.finish();
                         activity.startActivity(new Intent(activity, HomeActivity.class));
                     }

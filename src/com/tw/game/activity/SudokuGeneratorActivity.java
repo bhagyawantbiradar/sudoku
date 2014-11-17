@@ -21,7 +21,9 @@ import com.tw.game.result.Cell;
 import com.tw.game.result.Result;
 import com.tw.game.timer.Timer;
 
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SudokuGeneratorActivity extends Activity {
@@ -33,6 +35,9 @@ public class SudokuGeneratorActivity extends Activity {
     private String level;
     private Timer timer;
     private SudokuHelper sudokuHelper = new SudokuHelper();
+    private List<List<Integer>> puzzle = new ArrayList<>();
+    private String fileName = "game";
+    private boolean resume;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,7 +51,9 @@ public class SudokuGeneratorActivity extends Activity {
         Intent intent = getIntent();
         level = intent.getStringExtra("level");
         if (level == null) level = getString(R.string.easyLevel);
-        sudoku.generatePuzzle(level);
+        resume = intent.getBooleanExtra("resume", false);
+        if (resume) loadSavedGame();
+        else sudoku.generatePuzzle(level);
         sudokuHelper.addTextViews(this.sudokuGrid);
         showPuzzle();
     }
@@ -99,6 +106,18 @@ public class SudokuGeneratorActivity extends Activity {
         showResult();
     }
 
+    private void updatePuzzle() {
+        for (int i = 0; i < 9; i++) {
+            puzzle.add(Arrays.asList(new Integer[9]));
+            for (int j = 0; j < 9; j++) {
+                EditText editText = (EditText) findViewById(sudokuGrid.get(i).get(j));
+                if (editText.getText().toString().equals("")) {
+                    puzzle.get(i).set(j, null);
+                } else puzzle.get(i).set(j, Integer.parseInt(editText.getText().toString()));
+            }
+        }
+    }
+
     public void clearNumber(View view) {
         sudokuHelper.clearNumber(selectedTextView);
     }
@@ -106,15 +125,16 @@ public class SudokuGeneratorActivity extends Activity {
     private void showPuzzle() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                final EditText number = (EditText) findViewById(sudokuGrid.get(i).get(j));
-                sudokuHelper.setProperties(sudokuPuzzle, sudokuPuzzle, new Cell(i, j), number, null, false);
+                final EditText number;
+                number = (EditText) findViewById(sudokuGrid.get(i).get(j));
+                if (resume) sudokuHelper.setProperties(puzzle, puzzle, new Cell(i, j), number, null, false);
+                else sudokuHelper.setProperties(sudokuPuzzle, sudokuPuzzle, new Cell(i, j), number, null, false);
                 number.setInputType(InputType.TYPE_NULL);
                 number.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View view, MotionEvent motionEvent) {
                         selectedTextView = (TextView) view;
                         sudokuHelper.showKeypad(number, SudokuGeneratorActivity.this);
-
                         return false;
                     }
                 });
@@ -163,7 +183,31 @@ public class SudokuGeneratorActivity extends Activity {
             for (Cell cell : result.getCells())
                 changeColorTo(cell, getResources().getColor(R.color.error_background));
             cells = result.getCells();
-            Toast.makeText(this, "Your Solution is not right.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Your solution is not right.", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void saveGame() {
+        updatePuzzle();
+        File game = getFileStreamPath(fileName);
+        try {
+            if (game.exists() || game.createNewFile()) {
+                FileOutputStream fos = openFileOutput(fileName, MODE_PRIVATE);
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                oos.writeObject(this.puzzle);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadSavedGame() {
+        try {
+            FileInputStream fis = openFileInput(fileName);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            puzzle = (List<List<Integer>>) ois.readObject();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

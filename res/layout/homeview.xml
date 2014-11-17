@@ -26,6 +26,16 @@
             android:typeface="serif"/>
 
     <Button android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="Resume"
+            android:id="@+id/resume"
+            android:onClick="resumePrevious"
+            android:background="#7a7a7a"
+            android:layout_margin="20dp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:typeface="serif"/>
+
+    <Button android:layout_width="match_parent" android:layout_height="wrap_content"
             android:text="Solver"
             android:id="@+id/solver"
             android:onClick="loadSolver"
@@ -34,6 +44,4 @@
             android:textColor="#000000"
             android:textStyle="bold"
             android:typeface="serif"/>
-
-
 </LinearLayout>

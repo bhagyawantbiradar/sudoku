@@ -56,4 +56,11 @@ public class HomeActivity extends Activity implements AlertPositiveListener, Ada
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
     }
+
+    public void resumePrevious(View view) {
+        Intent intent = new Intent(this, SudokuGeneratorActivity.class);
+        intent.putExtra("resume", true);
+        finish();
+        startActivity(intent);
+    }
 }
